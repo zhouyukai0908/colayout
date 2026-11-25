@@ -4,7 +4,7 @@ Official repository for the paper:
 
 > **CoLayout: Coordinating Layout Design Agents Through a Shared Design State**  
 > Yukai Zhou  
-> Department of Industrial Design, Faculty of Design, University of Macau, Macao, China
+> Faculty of Design, University of Macau, Macau SAR, China
 
 This repository provides the structured 36-brief layout benchmark, source code for CoLayout and all five baseline/ablation methods, deterministic conflict detector, priority arbiter, automated unit test suite, and complete experiment logs (`216` completed runs + `57` logged validation-failure attempts) to support full offline verification and reproduction of every table, figure, and statistical test in the manuscript.
 
