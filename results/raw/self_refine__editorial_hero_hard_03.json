@@ -1,0 +1,968 @@
+{
+  "final_state": {
+    "canvas": {
+      "width": 640,
+      "height": 360,
+      "bg_color": "#FAF8F1"
+    },
+    "elements": [
+      {
+        "id": "panel",
+        "type": "card",
+        "x": 0.0,
+        "y": 64.0,
+        "w": 640.0,
+        "h": 296.0,
+        "z_index": 0,
+        "text": null,
+        "font_size": null,
+        "fg_color": "#000000",
+        "bg_color": "#23342F"
+      },
+      {
+        "id": "headline",
+        "type": "title",
+        "x": 16.0,
+        "y": 8.0,
+        "w": 608.0,
+        "h": 32.0,
+        "z_index": 1,
+        "text": "Thread by Thread",
+        "font_size": 24,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "subhead",
+        "type": "subtitle",
+        "x": 16.0,
+        "y": 40.0,
+        "w": 608.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Craft archive | Repair traditions",
+        "font_size": 16,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "description",
+        "type": "body",
+        "x": 16.0,
+        "y": 130.0,
+        "w": 608.0,
+        "h": 60.0,
+        "z_index": 1,
+        "text": "A nearly invisible mend preserves the shape of a garment in daily use.",
+        "font_size": 14,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "visual",
+        "type": "image",
+        "x": 16.0,
+        "y": 200.0,
+        "w": 224.0,
+        "h": 140.0,
+        "z_index": 1,
+        "text": null,
+        "font_size": null,
+        "fg_color": "#000000",
+        "bg_color": null
+      },
+      {
+        "id": "tag_1",
+        "type": "tag",
+        "x": 256.0,
+        "y": 130.0,
+        "w": 100.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Textiles",
+        "font_size": 12,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "tag_2",
+        "type": "tag",
+        "x": 366.0,
+        "y": 130.0,
+        "w": 100.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Repair",
+        "font_size": 12,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "caption",
+        "type": "body",
+        "x": 16.0,
+        "y": 344.0,
+        "w": 608.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Detail of a woven patch",
+        "font_size": 12,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "primary_action",
+        "type": "button",
+        "x": 320.0,
+        "y": 304.0,
+        "w": 120.0,
+        "h": 40.0,
+        "z_index": 1,
+        "text": "Read feature",
+        "font_size": 16,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "secondary_action",
+        "type": "button",
+        "x": 448.0,
+        "y": 304.0,
+        "w": 120.0,
+        "h": 40.0,
+        "z_index": 1,
+        "text": "View close-ups",
+        "font_size": 16,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      }
+    ],
+    "version": 0
+  },
+  "metrics": {
+    "OR": 0.03667481662591687,
+    "BOR": 0.1,
+    "CPR": 0.625,
+    "AS": 0.5555555555555556,
+    "CSR": 0.0
+  },
+  "conflicts": [
+    {
+      "conflict_type": "overlap",
+      "element_ids": [
+        "description",
+        "tag_1"
+      ],
+      "severity": "hard",
+      "detail": "Intersection area is 2400 square pixels.",
+      "numeric_value": 2400.0
+    },
+    {
+      "conflict_type": "overlap",
+      "element_ids": [
+        "description",
+        "tag_2"
+      ],
+      "severity": "hard",
+      "detail": "Intersection area is 2400 square pixels.",
+      "numeric_value": 2400.0
+    },
+    {
+      "conflict_type": "overflow",
+      "element_ids": [
+        "caption"
+      ],
+      "severity": "hard",
+      "detail": "Farthest edge extends 8 pixels beyond the canvas.",
+      "numeric_value": 8.0
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "headline"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 1.062649024878595 is below the required 3.0.",
+      "numeric_value": 1.062649024878595
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "subhead"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+      "numeric_value": 1.062649024878595
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "caption"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+      "numeric_value": 1.062649024878595
+    }
+  ],
+  "rounds_used": 5,
+  "total_tokens": 10705,
+  "history": [
+    {
+      "round": 1,
+      "role": "Layout Designer",
+      "response": {
+        "canvas": {
+          "width": 640,
+          "height": 360,
+          "bg_color": "#FAF8F1"
+        },
+        "elements": [
+          {
+            "id": "panel",
+            "type": "card",
+            "x": 0,
+            "y": 64,
+            "w": 640,
+            "h": 296,
+            "z_index": 0,
+            "bg_color": "#23342F"
+          },
+          {
+            "id": "headline",
+            "type": "title",
+            "x": 16,
+            "y": 8,
+            "w": 608,
+            "h": 32,
+            "z_index": 1,
+            "text": "Thread by Thread",
+            "font_size": 24,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "subhead",
+            "type": "subtitle",
+            "x": 16,
+            "y": 40,
+            "w": 608,
+            "h": 24,
+            "z_index": 1,
+            "text": "Craft archive | Repair traditions",
+            "font_size": 16,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "description",
+            "type": "body",
+            "x": 16,
+            "y": 64,
+            "w": 608,
+            "h": 60,
+            "z_index": 1,
+            "text": "A nearly invisible mend preserves the shape of a garment in daily use.",
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "visual",
+            "type": "image",
+            "x": 16,
+            "y": 128,
+            "w": 208,
+            "h": 140,
+            "z_index": 1,
+            "text_or_desc": "A close detail of a darned wool sleeve"
+          },
+          {
+            "id": "tag_1",
+            "type": "tag",
+            "x": 240,
+            "y": 128,
+            "w": 100,
+            "h": 24,
+            "z_index": 1,
+            "text": "Textiles",
+            "font_size": 12,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "tag_2",
+            "type": "tag",
+            "x": 350,
+            "y": 128,
+            "w": 100,
+            "h": 24,
+            "z_index": 1,
+            "text": "Repair",
+            "font_size": 12,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "caption",
+            "type": "body",
+            "x": 16,
+            "y": 270,
+            "w": 608,
+            "h": 24,
+            "z_index": 1,
+            "text": "Detail of a woven patch",
+            "font_size": 12,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "primary_action",
+            "type": "button",
+            "x": 320,
+            "y": 304,
+            "w": 120,
+            "h": 40,
+            "z_index": 1,
+            "text": "Read feature",
+            "font_size": 16,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "secondary_action",
+            "type": "button",
+            "x": 448,
+            "y": 304,
+            "w": 120,
+            "h": 40,
+            "z_index": 1,
+            "text": "View close-ups",
+            "font_size": 16,
+            "fg_color": "#FFFFFF"
+          }
+        ],
+        "version": 0
+      },
+      "token_usage": {
+        "prompt_tokens": 639,
+        "completion_tokens": 833,
+        "total_tokens": 1472
+      }
+    },
+    {
+      "round": 2,
+      "role": "Layout Designer",
+      "response": {
+        "status": "REVISED",
+        "critique": "The layout has overlapping elements, specifically the tags with the visual. Additionally, the visual is less than one third of the canvas width, which goes against the design notes. The vertical spacing between the description and the image could be improved for better legibility. Lastly, the y-coordinates of the tag elements do not respect the required disjoint space.",
+        "layout": {
+          "canvas": {
+            "width": 640,
+            "height": 360,
+            "bg_color": "#FAF8F1"
+          },
+          "elements": [
+            {
+              "id": "panel",
+              "type": "card",
+              "x": 0.0,
+              "y": 64.0,
+              "w": 640.0,
+              "h": 296.0,
+              "z_index": 0,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": "#23342F"
+            },
+            {
+              "id": "headline",
+              "type": "title",
+              "x": 16.0,
+              "y": 8.0,
+              "w": 608.0,
+              "h": 32.0,
+              "z_index": 1,
+              "text": "Thread by Thread",
+              "font_size": 24,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "subhead",
+              "type": "subtitle",
+              "x": 16.0,
+              "y": 40.0,
+              "w": 608.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Craft archive | Repair traditions",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "description",
+              "type": "body",
+              "x": 16.0,
+              "y": 64.0,
+              "w": 608.0,
+              "h": 60.0,
+              "z_index": 1,
+              "text": "A nearly invisible mend preserves the shape of a garment in daily use.",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "visual",
+              "type": "image",
+              "x": 16.0,
+              "y": 130.0,
+              "w": 224.0,
+              "h": 140.0,
+              "z_index": 1,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": null
+            },
+            {
+              "id": "tag_1",
+              "type": "tag",
+              "x": 256.0,
+              "y": 130.0,
+              "w": 100.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Textiles",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_2",
+              "type": "tag",
+              "x": 366.0,
+              "y": 130.0,
+              "w": 100.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Repair",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "caption",
+              "type": "body",
+              "x": 16.0,
+              "y": 280.0,
+              "w": 608.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Detail of a woven patch",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "primary_action",
+              "type": "button",
+              "x": 320.0,
+              "y": 304.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Read feature",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "secondary_action",
+              "type": "button",
+              "x": 448.0,
+              "y": 304.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "View close-ups",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            }
+          ],
+          "version": 1
+        }
+      },
+      "token_usage": {
+        "prompt_tokens": 1308,
+        "completion_tokens": 1094,
+        "total_tokens": 2402
+      }
+    },
+    {
+      "round": 3,
+      "role": "Layout Designer",
+      "response": {
+        "status": "REVISED",
+        "critique": "The layout has an overflow issue as the visual element does not occupy at least one third of the canvas width, and there is inadequate spacing between the textual elements and the visual. Additionally, the description and caption elements are too close to the visual, violating the 8 px minimum spacing requirement.",
+        "layout": {
+          "canvas": {
+            "width": 640,
+            "height": 360,
+            "bg_color": "#FAF8F1"
+          },
+          "elements": [
+            {
+              "id": "panel",
+              "type": "card",
+              "x": 0.0,
+              "y": 64.0,
+              "w": 640.0,
+              "h": 296.0,
+              "z_index": 0,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": "#23342F"
+            },
+            {
+              "id": "headline",
+              "type": "title",
+              "x": 16.0,
+              "y": 8.0,
+              "w": 608.0,
+              "h": 32.0,
+              "z_index": 1,
+              "text": "Thread by Thread",
+              "font_size": 24,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "subhead",
+              "type": "subtitle",
+              "x": 16.0,
+              "y": 40.0,
+              "w": 608.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Craft archive | Repair traditions",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "description",
+              "type": "body",
+              "x": 16.0,
+              "y": 130.0,
+              "w": 608.0,
+              "h": 60.0,
+              "z_index": 1,
+              "text": "A nearly invisible mend preserves the shape of a garment in daily use.",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "visual",
+              "type": "image",
+              "x": 16.0,
+              "y": 200.0,
+              "w": 224.0,
+              "h": 140.0,
+              "z_index": 1,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": null
+            },
+            {
+              "id": "tag_1",
+              "type": "tag",
+              "x": 256.0,
+              "y": 130.0,
+              "w": 100.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Textiles",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_2",
+              "type": "tag",
+              "x": 366.0,
+              "y": 130.0,
+              "w": 100.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Repair",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "caption",
+              "type": "body",
+              "x": 16.0,
+              "y": 344.0,
+              "w": 608.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Detail of a woven patch",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "primary_action",
+              "type": "button",
+              "x": 320.0,
+              "y": 304.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Read feature",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "secondary_action",
+              "type": "button",
+              "x": 448.0,
+              "y": 304.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "View close-ups",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            }
+          ],
+          "version": 2
+        }
+      },
+      "token_usage": {
+        "prompt_tokens": 1308,
+        "completion_tokens": 1082,
+        "total_tokens": 2390
+      }
+    },
+    {
+      "round": 4,
+      "role": "Layout Designer",
+      "response": {
+        "status": "REVISED",
+        "critique": "The layout has overflow issues and misalignment. The tags and description are not placed optimally within the panel, and the visual element should take up a larger portion of the canvas while ensuring the legal contrast ratio. Additionally, alignment and spacing adjustments are necessary to respect design instructions.",
+        "layout": {
+          "canvas": {
+            "width": 640,
+            "height": 360,
+            "bg_color": "#FAF8F1"
+          },
+          "elements": [
+            {
+              "id": "panel",
+              "type": "card",
+              "x": 0.0,
+              "y": 64.0,
+              "w": 640.0,
+              "h": 296.0,
+              "z_index": 0,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": "#23342F"
+            },
+            {
+              "id": "headline",
+              "type": "title",
+              "x": 16.0,
+              "y": 8.0,
+              "w": 608.0,
+              "h": 32.0,
+              "z_index": 1,
+              "text": "Thread by Thread",
+              "font_size": 24,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "subhead",
+              "type": "subtitle",
+              "x": 16.0,
+              "y": 40.0,
+              "w": 608.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Craft archive | Repair traditions",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "description",
+              "type": "body",
+              "x": 16.0,
+              "y": 130.0,
+              "w": 608.0,
+              "h": 60.0,
+              "z_index": 1,
+              "text": "A nearly invisible mend preserves the shape of a garment in daily use.",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "visual",
+              "type": "image",
+              "x": 16.0,
+              "y": 200.0,
+              "w": 224.0,
+              "h": 140.0,
+              "z_index": 1,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": null
+            },
+            {
+              "id": "tag_1",
+              "type": "tag",
+              "x": 256.0,
+              "y": 130.0,
+              "w": 100.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Textiles",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_2",
+              "type": "tag",
+              "x": 366.0,
+              "y": 130.0,
+              "w": 100.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Repair",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "caption",
+              "type": "body",
+              "x": 16.0,
+              "y": 344.0,
+              "w": 608.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Detail of a woven patch",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "primary_action",
+              "type": "button",
+              "x": 320.0,
+              "y": 304.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Read feature",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "secondary_action",
+              "type": "button",
+              "x": 448.0,
+              "y": 304.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "View close-ups",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            }
+          ],
+          "version": 3
+        }
+      },
+      "token_usage": {
+        "prompt_tokens": 1308,
+        "completion_tokens": 1079,
+        "total_tokens": 2387
+      }
+    },
+    {
+      "round": 5,
+      "role": "Layout Designer",
+      "response": {
+        "status": "REVISED",
+        "critique": "The visual element overlaps with both tags and the description, making it visually cluttered and confusing. Additionally, the caption is misaligned at the bottom of the canvas and overlaps with the buttons. The layout should ensure that each element has sufficient space from others to enhance clarity and readability. The tags should also be moved within the panel to keep them together with the description, ensuring all foreground items have at least an 8 px gap between them. The button placement needs to be adjusted to maintain alignment and spacing requirements.",
+        "layout": {
+          "canvas": {
+            "width": 640,
+            "height": 360,
+            "bg_color": "#FAF8F1"
+          },
+          "elements": [
+            {
+              "id": "panel",
+              "type": "card",
+              "x": 0.0,
+              "y": 64.0,
+              "w": 640.0,
+              "h": 296.0,
+              "z_index": 0,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": "#23342F"
+            },
+            {
+              "id": "headline",
+              "type": "title",
+              "x": 16.0,
+              "y": 8.0,
+              "w": 608.0,
+              "h": 32.0,
+              "z_index": 1,
+              "text": "Thread by Thread",
+              "font_size": 24,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "subhead",
+              "type": "subtitle",
+              "x": 16.0,
+              "y": 40.0,
+              "w": 608.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Craft archive | Repair traditions",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "description",
+              "type": "body",
+              "x": 16.0,
+              "y": 130.0,
+              "w": 608.0,
+              "h": 60.0,
+              "z_index": 1,
+              "text": "A nearly invisible mend preserves the shape of a garment in daily use.",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "visual",
+              "type": "image",
+              "x": 16.0,
+              "y": 200.0,
+              "w": 224.0,
+              "h": 140.0,
+              "z_index": 1,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": null
+            },
+            {
+              "id": "tag_1",
+              "type": "tag",
+              "x": 256.0,
+              "y": 130.0,
+              "w": 100.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Textiles",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_2",
+              "type": "tag",
+              "x": 366.0,
+              "y": 130.0,
+              "w": 100.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Repair",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "caption",
+              "type": "body",
+              "x": 16.0,
+              "y": 344.0,
+              "w": 608.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Detail of a woven patch",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "primary_action",
+              "type": "button",
+              "x": 320.0,
+              "y": 304.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Read feature",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "secondary_action",
+              "type": "button",
+              "x": 448.0,
+              "y": 304.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "View close-ups",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            }
+          ]
+        }
+      },
+      "token_usage": {
+        "prompt_tokens": 1308,
+        "completion_tokens": 746,
+        "total_tokens": 2054
+      }
+    }
+  ],
+  "model": "gpt-4o-mini",
+  "max_rounds": 5,
+  "method": "self_refine",
+  "task_id": "editorial_hero_hard_03",
+  "difficulty": "hard",
+  "domain": "editorial_hero",
+  "token_usage": {
+    "prompt_tokens": 5871,
+    "completion_tokens": 4834,
+    "total_tokens": 10705
+  }
+}

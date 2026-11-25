@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "colayout"
+version = "0.1.0"
+description = "Deterministic evaluation and rendering of shared multi-agent layout states"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = ["pydantic>=2,<3", "openai>=1.40,<3", "python-dotenv>=1,<2"]
+
+[project.optional-dependencies]
+test = ["pytest>=7", "matplotlib>=3.7", "Pillow>=10.1"]
+png = ["Pillow>=10.1"]
+paper = ["matplotlib>=3.7", "Pillow>=10.1"]
+
+[tool.setuptools]
+packages = ["src", "src.methods"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]

@@ -1,0 +1,21 @@
+{
+  "model": "gpt-4o-mini",
+  "max_rounds": 5,
+  "method": "ours_no_detector",
+  "task_id": "editorial_hero_medium_03",
+  "difficulty": "medium",
+  "domain": "editorial_hero",
+  "status": "failed",
+  "error_type": "InvalidCompletion",
+  "round_index": 0,
+  "role": "Compliance Critic",
+  "token_usage": {
+    "prompt_tokens": 6554,
+    "completion_tokens": 1431,
+    "total_tokens": 7985
+  },
+  "total_tokens": 7985,
+  "unreported_requests": 0,
+  "usage_complete": true,
+  "reason": "Invalid JSON completion after 3 attempts: 1 validation error for Conflict\nelement_ids\n  Field required [type=missing, input_value={'conflict_type': 'contra....95, 'severity': 'hard'}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.12/v/missing"
+}

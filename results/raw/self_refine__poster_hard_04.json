@@ -1,0 +1,1046 @@
+{
+  "final_state": {
+    "canvas": {
+      "width": 460,
+      "height": 560,
+      "bg_color": "#FFF9ED"
+    },
+    "elements": [
+      {
+        "id": "panel",
+        "type": "card",
+        "x": 10.0,
+        "y": 64.0,
+        "w": 440.0,
+        "h": 440.0,
+        "z_index": 0,
+        "text": null,
+        "font_size": null,
+        "fg_color": "#000000",
+        "bg_color": "#33223D"
+      },
+      {
+        "id": "headline",
+        "type": "title",
+        "x": 15.0,
+        "y": 10.0,
+        "w": 430.0,
+        "h": 54.0,
+        "z_index": 1,
+        "text": "The Last Reel",
+        "font_size": 32,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "subhead",
+        "type": "subtitle",
+        "x": 15.0,
+        "y": 50.0,
+        "w": 430.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Silent film with live piano",
+        "font_size": 16,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "visual",
+        "type": "image",
+        "x": 20.0,
+        "y": 80.0,
+        "w": 130.0,
+        "h": 220.0,
+        "z_index": 1,
+        "text": null,
+        "font_size": null,
+        "fg_color": "#000000",
+        "bg_color": null
+      },
+      {
+        "id": "description",
+        "type": "body",
+        "x": 160.0,
+        "y": 80.0,
+        "w": 250.0,
+        "h": 60.0,
+        "z_index": 1,
+        "text": "A restored travelogue returns to the screen with a new live score.",
+        "font_size": 14,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "tag_1",
+        "type": "tag",
+        "x": 160.0,
+        "y": 150.0,
+        "w": 70.0,
+        "h": 30.0,
+        "z_index": 1,
+        "text": "Screening",
+        "font_size": 12,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "tag_2",
+        "type": "tag",
+        "x": 160.0,
+        "y": 190.0,
+        "w": 70.0,
+        "h": 30.0,
+        "z_index": 1,
+        "text": "35 mm",
+        "font_size": 12,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "tag_3",
+        "type": "tag",
+        "x": 160.0,
+        "y": 230.0,
+        "w": 70.0,
+        "h": 30.0,
+        "z_index": 1,
+        "text": "One night",
+        "font_size": 12,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "caption",
+        "type": "body",
+        "x": 20.0,
+        "y": 280.0,
+        "w": 400.0,
+        "h": 30.0,
+        "z_index": 1,
+        "text": "Projection starts at 19:30",
+        "font_size": 14,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "primary_action",
+        "type": "button",
+        "x": 70.0,
+        "y": 490.0,
+        "w": 120.0,
+        "h": 40.0,
+        "z_index": 1,
+        "text": "Reserve seats",
+        "font_size": 14,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "secondary_action",
+        "type": "button",
+        "x": 210.0,
+        "y": 490.0,
+        "w": 120.0,
+        "h": 40.0,
+        "z_index": 1,
+        "text": "Read film notes",
+        "font_size": 14,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      }
+    ],
+    "version": 4
+  },
+  "metrics": {
+    "OR": 0.08206397562833206,
+    "BOR": 0.0,
+    "CPR": 0.5555555555555556,
+    "AS": 0.8,
+    "CSR": 0.0
+  },
+  "conflicts": [
+    {
+      "conflict_type": "overlap",
+      "element_ids": [
+        "headline",
+        "subhead"
+      ],
+      "severity": "hard",
+      "detail": "Intersection area is 6020 square pixels.",
+      "numeric_value": 6020.0
+    },
+    {
+      "conflict_type": "overlap",
+      "element_ids": [
+        "visual",
+        "caption"
+      ],
+      "severity": "hard",
+      "detail": "Intersection area is 2600 square pixels.",
+      "numeric_value": 2600.0
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "headline"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 1.0486808827883802 is below the required 3.0.",
+      "numeric_value": 1.0486808827883802
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "subhead"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 1.0486808827883802 is below the required 4.5.",
+      "numeric_value": 1.0486808827883802
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "primary_action"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 1.0486808827883802 is below the required 4.5.",
+      "numeric_value": 1.0486808827883802
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "secondary_action"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 1.0486808827883802 is below the required 4.5.",
+      "numeric_value": 1.0486808827883802
+    }
+  ],
+  "rounds_used": 5,
+  "total_tokens": 11428,
+  "history": [
+    {
+      "round": 1,
+      "role": "Layout Designer",
+      "response": {
+        "canvas": {
+          "width": 460,
+          "height": 560,
+          "bg_color": "#FFF9ED"
+        },
+        "elements": [
+          {
+            "id": "panel",
+            "type": "card",
+            "x": 10,
+            "y": 64,
+            "w": 440,
+            "h": 440,
+            "z_index": 0,
+            "bg_color": "#33223D"
+          },
+          {
+            "id": "headline",
+            "type": "title",
+            "x": 15,
+            "y": 10,
+            "w": 430,
+            "h": 54,
+            "z_index": 1,
+            "text": "The Last Reel",
+            "font_size": 32,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "subhead",
+            "type": "subtitle",
+            "x": 15,
+            "y": 50,
+            "w": 430,
+            "h": 24,
+            "z_index": 1,
+            "text": "Silent film with live piano",
+            "font_size": 16,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "description",
+            "type": "body",
+            "x": 20,
+            "y": 80,
+            "w": 400,
+            "h": 60,
+            "z_index": 1,
+            "text": "A restored travelogue returns to the screen with a new live score.",
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "visual",
+            "type": "image",
+            "x": 20,
+            "y": 150,
+            "w": 146,
+            "h": 220,
+            "z_index": 1,
+            "text_or_desc": "A film reel and its handwritten cue sheet"
+          },
+          {
+            "id": "tag_1",
+            "type": "tag",
+            "x": 180,
+            "y": 150,
+            "w": 70,
+            "h": 30,
+            "z_index": 1,
+            "text": "Screening",
+            "font_size": 12,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "tag_2",
+            "type": "tag",
+            "x": 180,
+            "y": 190,
+            "w": 70,
+            "h": 30,
+            "z_index": 1,
+            "text": "35 mm",
+            "font_size": 12,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "tag_3",
+            "type": "tag",
+            "x": 180,
+            "y": 230,
+            "w": 70,
+            "h": 30,
+            "z_index": 1,
+            "text": "One night",
+            "font_size": 12,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "caption",
+            "type": "body",
+            "x": 20,
+            "y": 400,
+            "w": 400,
+            "h": 30,
+            "z_index": 1,
+            "text": "Projection starts at 19:30",
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "primary_action",
+            "type": "button",
+            "x": 105,
+            "y": 510,
+            "w": 120,
+            "h": 40,
+            "z_index": 1,
+            "text": "Reserve seats",
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "secondary_action",
+            "type": "button",
+            "x": 235,
+            "y": 510,
+            "w": 120,
+            "h": 40,
+            "z_index": 1,
+            "text": "Read film notes",
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          }
+        ],
+        "version": 0
+      },
+      "token_usage": {
+        "prompt_tokens": 659,
+        "completion_tokens": 913,
+        "total_tokens": 1572
+      }
+    },
+    {
+      "round": 2,
+      "role": "Layout Designer",
+      "response": {
+        "status": "REVISED",
+        "critique": "The current layout has overlap issues with the tags, caption, and description being placed too close to the visual, leading to a cluttered appearance. Additionally, the visual size is below the one-third requirement of the canvas width, and there is not enough padding between the buttons.",
+        "layout": {
+          "canvas": {
+            "width": 460,
+            "height": 560,
+            "bg_color": "#FFF9ED"
+          },
+          "elements": [
+            {
+              "id": "panel",
+              "type": "card",
+              "x": 10.0,
+              "y": 64.0,
+              "w": 440.0,
+              "h": 440.0,
+              "z_index": 0,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": "#33223D"
+            },
+            {
+              "id": "headline",
+              "type": "title",
+              "x": 15.0,
+              "y": 10.0,
+              "w": 430.0,
+              "h": 54.0,
+              "z_index": 1,
+              "text": "The Last Reel",
+              "font_size": 32,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "subhead",
+              "type": "subtitle",
+              "x": 15.0,
+              "y": 50.0,
+              "w": 430.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Silent film with live piano",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "description",
+              "type": "body",
+              "x": 20.0,
+              "y": 80.0,
+              "w": 400.0,
+              "h": 60.0,
+              "z_index": 1,
+              "text": "A restored travelogue returns to the screen with a new live score.",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "visual",
+              "type": "image",
+              "x": 20.0,
+              "y": 150.0,
+              "w": 180.0,
+              "h": 220.0,
+              "z_index": 1,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": null
+            },
+            {
+              "id": "tag_1",
+              "type": "tag",
+              "x": 210.0,
+              "y": 150.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "Screening",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_2",
+              "type": "tag",
+              "x": 210.0,
+              "y": 190.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "35 mm",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_3",
+              "type": "tag",
+              "x": 210.0,
+              "y": 230.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "One night",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "caption",
+              "type": "body",
+              "x": 20.0,
+              "y": 300.0,
+              "w": 400.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "Projection starts at 19:30",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "primary_action",
+              "type": "button",
+              "x": 90.0,
+              "y": 510.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Reserve seats",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "secondary_action",
+              "type": "button",
+              "x": 230.0,
+              "y": 510.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Read film notes",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            }
+          ],
+          "version": 1
+        }
+      },
+      "token_usage": {
+        "prompt_tokens": 1389,
+        "completion_tokens": 764,
+        "total_tokens": 2153
+      }
+    },
+    {
+      "round": 3,
+      "role": "Layout Designer",
+      "response": {
+        "status": "REVISED",
+        "critique": "The layout had issues with overflow and overlap, particularly with the tags exceeding the panel's height and the visual's positioning, which resulted in a poorly structured alignment. Also, the button spacing did not maintain the required 8px distance between them.",
+        "layout": {
+          "canvas": {
+            "width": 460,
+            "height": 560,
+            "bg_color": "#FFF9ED"
+          },
+          "elements": [
+            {
+              "id": "panel",
+              "type": "card",
+              "x": 10.0,
+              "y": 64.0,
+              "w": 440.0,
+              "h": 440.0,
+              "z_index": 0,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": "#33223D"
+            },
+            {
+              "id": "headline",
+              "type": "title",
+              "x": 15.0,
+              "y": 10.0,
+              "w": 430.0,
+              "h": 54.0,
+              "z_index": 1,
+              "text": "The Last Reel",
+              "font_size": 32,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "subhead",
+              "type": "subtitle",
+              "x": 15.0,
+              "y": 50.0,
+              "w": 430.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Silent film with live piano",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "description",
+              "type": "body",
+              "x": 20.0,
+              "y": 80.0,
+              "w": 400.0,
+              "h": 60.0,
+              "z_index": 1,
+              "text": "A restored travelogue returns to the screen with a new live score.",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "visual",
+              "type": "image",
+              "x": 20.0,
+              "y": 150.0,
+              "w": 130.0,
+              "h": 220.0,
+              "z_index": 1,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": null
+            },
+            {
+              "id": "tag_1",
+              "type": "tag",
+              "x": 160.0,
+              "y": 150.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "Screening",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_2",
+              "type": "tag",
+              "x": 160.0,
+              "y": 190.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "35 mm",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_3",
+              "type": "tag",
+              "x": 160.0,
+              "y": 230.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "One night",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "caption",
+              "type": "body",
+              "x": 20.0,
+              "y": 300.0,
+              "w": 400.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "Projection starts at 19:30",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "primary_action",
+              "type": "button",
+              "x": 80.0,
+              "y": 510.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Reserve seats",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "secondary_action",
+              "type": "button",
+              "x": 210.0,
+              "y": 510.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Read film notes",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            }
+          ],
+          "version": 2
+        }
+      },
+      "token_usage": {
+        "prompt_tokens": 1389,
+        "completion_tokens": 1169,
+        "total_tokens": 2558
+      }
+    },
+    {
+      "round": 4,
+      "role": "Layout Designer",
+      "response": {
+        "status": "REVISED",
+        "critique": "The layout has overlapping issues with the button elements which are too close to each other (less than 8px apart) and the 'caption' element is positioned too close to the tags, violating the minimum spacing requirement. The overall brightness and contrast of text against the background may not meet accessibility standards in all areas.",
+        "layout": {
+          "canvas": {
+            "width": 460,
+            "height": 560,
+            "bg_color": "#FFF9ED"
+          },
+          "elements": [
+            {
+              "id": "panel",
+              "type": "card",
+              "x": 10.0,
+              "y": 64.0,
+              "w": 440.0,
+              "h": 440.0,
+              "z_index": 0,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": "#33223D"
+            },
+            {
+              "id": "headline",
+              "type": "title",
+              "x": 15.0,
+              "y": 10.0,
+              "w": 430.0,
+              "h": 54.0,
+              "z_index": 1,
+              "text": "The Last Reel",
+              "font_size": 32,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "subhead",
+              "type": "subtitle",
+              "x": 15.0,
+              "y": 50.0,
+              "w": 430.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Silent film with live piano",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "description",
+              "type": "body",
+              "x": 20.0,
+              "y": 80.0,
+              "w": 400.0,
+              "h": 60.0,
+              "z_index": 1,
+              "text": "A restored travelogue returns to the screen with a new live score.",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "visual",
+              "type": "image",
+              "x": 20.0,
+              "y": 150.0,
+              "w": 130.0,
+              "h": 220.0,
+              "z_index": 1,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": null
+            },
+            {
+              "id": "tag_1",
+              "type": "tag",
+              "x": 160.0,
+              "y": 150.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "Screening",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_2",
+              "type": "tag",
+              "x": 160.0,
+              "y": 190.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "35 mm",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_3",
+              "type": "tag",
+              "x": 160.0,
+              "y": 230.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "One night",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "caption",
+              "type": "body",
+              "x": 20.0,
+              "y": 300.0,
+              "w": 400.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "Projection starts at 19:30",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "primary_action",
+              "type": "button",
+              "x": 70.0,
+              "y": 510.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Reserve seats",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "secondary_action",
+              "type": "button",
+              "x": 210.0,
+              "y": 510.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Read film notes",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            }
+          ],
+          "version": 3
+        }
+      },
+      "token_usage": {
+        "prompt_tokens": 1389,
+        "completion_tokens": 1183,
+        "total_tokens": 2572
+      }
+    },
+    {
+      "round": 5,
+      "role": "Layout Designer",
+      "response": {
+        "status": "REVISED",
+        "critique": "The visual contains insufficient separation between tags and description with too close placement. The tags appear below the visual instead of being enclosed within the panel. There also needs to be at least an 8 px gap between the visual and the tags, and between the buttons. Additionally, the vertical alignment of the buttons could be improved.",
+        "layout": {
+          "canvas": {
+            "width": 460,
+            "height": 560,
+            "bg_color": "#FFF9ED"
+          },
+          "elements": [
+            {
+              "id": "panel",
+              "type": "card",
+              "x": 10.0,
+              "y": 64.0,
+              "w": 440.0,
+              "h": 440.0,
+              "z_index": 0,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": "#33223D"
+            },
+            {
+              "id": "headline",
+              "type": "title",
+              "x": 15.0,
+              "y": 10.0,
+              "w": 430.0,
+              "h": 54.0,
+              "z_index": 1,
+              "text": "The Last Reel",
+              "font_size": 32,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "subhead",
+              "type": "subtitle",
+              "x": 15.0,
+              "y": 50.0,
+              "w": 430.0,
+              "h": 24.0,
+              "z_index": 1,
+              "text": "Silent film with live piano",
+              "font_size": 16,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "visual",
+              "type": "image",
+              "x": 20.0,
+              "y": 80.0,
+              "w": 130.0,
+              "h": 220.0,
+              "z_index": 1,
+              "text": null,
+              "font_size": null,
+              "fg_color": "#000000",
+              "bg_color": null
+            },
+            {
+              "id": "description",
+              "type": "body",
+              "x": 160.0,
+              "y": 80.0,
+              "w": 250.0,
+              "h": 60.0,
+              "z_index": 1,
+              "text": "A restored travelogue returns to the screen with a new live score.",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_1",
+              "type": "tag",
+              "x": 160.0,
+              "y": 150.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "Screening",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_2",
+              "type": "tag",
+              "x": 160.0,
+              "y": 190.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "35 mm",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "tag_3",
+              "type": "tag",
+              "x": 160.0,
+              "y": 230.0,
+              "w": 70.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "One night",
+              "font_size": 12,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "caption",
+              "type": "body",
+              "x": 20.0,
+              "y": 280.0,
+              "w": 400.0,
+              "h": 30.0,
+              "z_index": 1,
+              "text": "Projection starts at 19:30",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "primary_action",
+              "type": "button",
+              "x": 70.0,
+              "y": 490.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Reserve seats",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            },
+            {
+              "id": "secondary_action",
+              "type": "button",
+              "x": 210.0,
+              "y": 490.0,
+              "w": 120.0,
+              "h": 40.0,
+              "z_index": 1,
+              "text": "Read film notes",
+              "font_size": 14,
+              "fg_color": "#FFFFFF",
+              "bg_color": null
+            }
+          ],
+          "version": 4
+        }
+      },
+      "token_usage": {
+        "prompt_tokens": 1389,
+        "completion_tokens": 1184,
+        "total_tokens": 2573
+      }
+    }
+  ],
+  "model": "gpt-4o-mini",
+  "max_rounds": 5,
+  "method": "self_refine",
+  "task_id": "poster_hard_04",
+  "difficulty": "hard",
+  "domain": "poster",
+  "token_usage": {
+    "prompt_tokens": 6215,
+    "completion_tokens": 5213,
+    "total_tokens": 11428
+  }
+}
