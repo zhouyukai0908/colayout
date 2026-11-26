@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import json
 import math
 import random
@@ -51,19 +52,34 @@ def paired_bootstrap_ci(a_vals: list[float], b_vals: list[float], n_boot: int = 
     return fmean(diffs), means[int(0.025 * n_boot)], means[int(0.975 * n_boot)]
 
 
-def _text_fit_strict_counts(state: LayoutState) -> tuple[int, int]:
-    """Return (fitting_boxes, total_text_boxes) using renderer.py greedy word wrap & Pillow arial.ttf."""
+def _load_audit_font(size: int, font_path: str | None, allow_fallback: bool):
+    target = font_path or "arial.ttf"
+    try:
+        return ImageFont.truetype(target, size), target
+    except OSError as exc:
+        if font_path or not allow_fallback:
+            raise SystemExit(
+                f"ERROR: Could not load required text-fit audit font '{target}'. "
+                "The paper's raster text-fit audit used Windows 'arial.ttf'. "
+                "Pass --font-path /path/to/arial.ttf to reproduce exact glyph metrics, "
+                "or pass --allow-font-fallback to run with Pillow's built-in default font."
+            ) from exc
+        return ImageFont.load_default(size=size), "Pillow-default-fallback"
+
+
+def _text_fit_strict_counts(
+    state: LayoutState, *, font_path: str | None = None, allow_fallback: bool = False
+) -> tuple[int, int, str]:
+    """Return (fitting_boxes, total_text_boxes, font_label) using renderer.py greedy word wrap."""
     draw = ImageDraw.Draw(Image.new("RGB", (10, 10)))
     elems = [e for e in state.elements if e.type in TEXT_TYPES and e.text]
     if not elems:
-        return 0, 0
+        return 0, 0, font_path or "arial.ttf"
     fit = 0
+    used_label = font_path or "arial.ttf"
     for e in elems:
         size = e.font_size or 16
-        try:
-            font = ImageFont.truetype("arial.ttf", size)
-        except OSError:
-            font = ImageFont.load_default(size=size)
+        font, used_label = _load_audit_font(size, font_path, allow_fallback)
         lines: list[str] = []
         for para in (e.text or "").split("\n"):
             line = ""
@@ -82,7 +98,7 @@ def _text_fit_strict_counts(state: LayoutState) -> tuple[int, int]:
             y += 1.2 * size
         if max_w <= e.w + 1e-6 and max_bottom <= e.h + 1e-6:
             fit += 1
-    return fit, len(elems)
+    return fit, len(elems), used_label
 
 
 def _inside(inner: Element, outer: Element) -> bool:
@@ -160,7 +176,23 @@ def _repair_delta(before: LayoutState, after: LayoutState) -> tuple[float, int]:
     return fmean(disps), bw
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
+    parser = argparse.ArgumentParser(description="Verify CoLayout paper statistics offline.")
+    parser.add_argument(
+        "--font-path",
+        default=None,
+        help="Path to TrueType font for raster text-fit audit (paper used Windows arial.ttf).",
+    )
+    parser.add_argument(
+        "--allow-font-fallback",
+        action="store_true",
+        help="Allow falling back to Pillow's default font if arial.ttf is unavailable (may alter text-fit counts).",
+    )
+    args = parser.parse_args(argv)
+
+    # Validate font availability upfront so missing arial.ttf fails cleanly rather than silently drifting.
+    _, font_label = _load_audit_font(16, args.font_path, args.allow_font_fallback)
+
     briefs = json.loads((ROOT / "data" / "briefs.json").read_text(encoding="utf-8"))
     briefs_by_id = {b["task_id"]: b for b in briefs}
     task_ids = sorted(briefs_by_id)
@@ -171,8 +203,9 @@ def main() -> None:
     records = {m: {t: json.loads((raw_dir / f"{m}__{t}.json").read_text(encoding="utf-8")) for t in task_ids} for m in METHODS}
     pre_csr = {m: {t: int(_pre_arbiter_csr(records[m][t], briefs_by_id[t])) for t in task_ids} for m in METHODS}
 
-    print("=== TABLE I SUMMARY (36 TASKS) ===")
-    print(f"{'Method':<22} {'OR%':>5} {'BOR%':>5} {'CPR%':>6} {'AS%':>5} {'PreCSR%':>8} {'CSR%':>6} {'Rnd':>5} {'Tok':>7} {'TFR%':>6} {'Fit/216':>8} {'AmortTok':>9}")
+    print(f"Text-fit audit font: {font_label}")
+    print("=== TABLE I SUMMARY (36 TASKS; 216 TEXT BOXES PER METHOD) ===")
+    print(f"{'Method':<22} {'OR%':>5} {'BOR%':>5} {'CPR%':>6} {'AS%':>5} {'PreCSR%':>8} {'CSR%':>6} {'Rnd':>5} {'Tok':>7} {'TFR%':>6} {'Micro%':>7} {'Fit/216':>8} {'AmortTok':>9}")
     tot_comp, tot_fail, tot_fail_n = 0, 0, 0
     for m in METHODS:
         recs = [records[m][t] for t in task_ids]
@@ -182,9 +215,17 @@ def main() -> None:
         tot_comp += comp_sum
         tot_fail += fail_sum
         tot_fail_n += len(f_recs)
-        tf_pairs = [_text_fit_strict_counts(LayoutState.model_validate(r["final_state"])) for r in recs]
-        tfr_macro = fmean(f / n for f, n in tf_pairs) * 100
-        fit_sum, box_sum = sum(f for f, _ in tf_pairs), sum(n for _, n in tf_pairs)
+        tf_triples = [
+            _text_fit_strict_counts(
+                LayoutState.model_validate(r["final_state"]),
+                font_path=args.font_path,
+                allow_fallback=args.allow_font_fallback,
+            )
+            for r in recs
+        ]
+        tfr_macro = fmean(f / n for f, n, _ in tf_triples) * 100
+        fit_sum, box_sum = sum(f for f, _, _ in tf_triples), sum(n for _, n, _ in tf_triples)
+        tfr_micro = fit_sum / box_sum * 100
         print(
             f"{m:<22} "
             f"{fmean(r['metrics']['OR'] for r in recs)*100:5.1f} "
@@ -196,6 +237,7 @@ def main() -> None:
             f"{fmean(r['rounds_used'] for r in recs):5.2f} "
             f"{fmean(r['total_tokens'] for r in recs):7,.0f} "
             f"{tfr_macro:6.1f} "
+            f"{tfr_micro:7.1f} "
             f"{fit_sum:>3d}/{box_sum:<3d} "
             f"{(comp_sum + fail_sum)/36:9,.0f}"
         )

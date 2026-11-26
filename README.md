@@ -32,7 +32,7 @@ This repository provides the structured 36-brief layout benchmark, source code f
   - *Mean center displacement*: Euclidean center shift (px) from Round-0 to terminal state, averaged across all elements per brief, then averaged across 36 briefs.
   - *Net black/white foreground shifts*: Count of elements per brief whose `fg_color` changed from Round-0 to `#000000` or `#FFFFFF` in the terminal state (counted once per element; reported both overall across all edits and restricted to Priority Arbiter overrides).
   - *Hard-brief zone adherence*: Fraction of all elements per hard brief lying inside their brief-specified vertical zone (top-64 px header, bottom-56 px footer, or middle `[64, H-56]`), averaged across the 12 hard briefs; header and dark-card enclosure rates are likewise brief-averaged.
-  - *Strict raster text-fit rate*: Fraction of text boxes whose Pillow `arial.ttf` greedy-wrapped glyph bounding box (`1.2×` line height) stays within `[0, w] × [0, h]`, brief-averaged across 36 briefs (with micro-averaged counts over all `216` text boxes also reported).
+  - *Strict raster text-fit rate*: Fraction of text boxes whose Windows `arial.ttf` greedy-wrapped glyph bounding box (`1.2×` line height) stays within `[0, w] × [0, h]`, brief-averaged across 36 layouts (`216` text boxes per method, with micro-averaged rates also reported). To prevent silent cross-platform font drift, `scripts/verify_paper_stats.py` requires `arial.ttf` by default (pass `--font-path /path/to/arial.ttf` on Linux/macOS to reproduce the paper's exact glyph metrics, or `--allow-font-fallback` to allow Pillow's built-in default font).
 
 ## Quick Verification (Offline, No API Key Required)
 
