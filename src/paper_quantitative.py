@@ -36,7 +36,7 @@ def _overall(groups: dict) -> dict:
     return rows
 
 
-def _ranked_column(rows: dict, field: str) -> dict[str, str]:
+def _ranked_column(rows: dict, field: str, *, bold_best: bool = True) -> dict[str, str]:
     """Compare the displayed precision so a displayed tie receives identical emphasis."""
     def format_value(value: float) -> str:
         if field == "rounds_used":
@@ -46,6 +46,8 @@ def _ranked_column(rows: dict, field: str) -> dict[str, str]:
         return f"{100 * value:.1f}"
 
     cells = {method: format_value(_metric_value(row, field)) for method, row in rows.items()}
+    if not bold_best:
+        return cells
     numeric = {method: float(cell.replace(",", "")) for method, cell in cells.items()}
     best = (max if field in HIGHER_IS_BETTER else min)(numeric.values())
     return {
@@ -69,7 +71,7 @@ def write_tables(groups: dict, tables_dir: Path, *, mock: bool = False) -> None:
     tables_dir.mkdir(parents=True, exist_ok=True)
     provenance = "Offline mock data. " if mock else ""
     mean_rows = _overall(groups)
-    overall_cells = [_ranked_column(mean_rows, field) for field in METRICS]
+    overall_cells = [_ranked_column(mean_rows, field, bold_best=(field != "CSR")) for field in METRICS]
     headings = []
     for field in METRICS:
         heading = {
@@ -81,11 +83,11 @@ def write_tables(groups: dict, tables_dir: Path, *, mock: bool = False) -> None:
         headings.append(heading + " $" + arrow + "$")
     main = [
         r"\begin{table*}[t]", r"\centering",
-        r"\caption{" + provenance + f"Mean layout scores and costs over "
+        r"\caption{" + provenance + f"Mean scores and costs over "
         f"{sum(groups['single_agent', d]['n_tasks'] for d in LEVELS)} tasks. "
-        r"OR, BOR, CPR, AS, and CSR evaluate terminal states; Pre-CSR is "
-        r"pre-arbitration; Tokens average completed runs (failed retries reported "
-        r"separately). Bold marks best.}",
+        r"OR, BOR, CPR, AS, and CSR score terminal states (CSR=100\% is "
+        r"guaranteed by arbitration, unbolded); Pre-CSR is pre-arbitration; "
+        r"Tokens average completed runs. Bold marks best.}",
         r"\label{tab:main}", r"\small", r"\setlength{\tabcolsep}{4.8pt}",
         r"\begin{tabular}{@{}lrrrrrrrr@{}}", r"\toprule",
         " & ".join(["Method", *headings]) + r" \\", r"\midrule",
@@ -126,18 +128,18 @@ def _format_token_label(value: float) -> str:
 def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> None:
     """Draw difficulty-grouped bars encoding pre-arbiter CSR, arbiter fallback gain, and token cost."""
     import matplotlib as mpl
+    from matplotlib import colors as mcolors
     from matplotlib.backends.backend_agg import FigureCanvasAgg
     from matplotlib.figure import Figure
     from matplotlib.ticker import MaxNLocator, StrMethodFormatter
 
     figures_dir = Path(figures_dir)
     figures_dir.mkdir(parents=True, exist_ok=True)
-    # Calm academic palette: four monotonic neutral grays for monolithic baselines,
-    # muted teal-slate for the single-agent blackboard ablation, steel blue for our
-    # detector ablation, and deep navy for CoLayout (Full).
-    colors = ("#F2F4F7", "#DCE2E8", "#BEC7D1", "#94A3B3", "#7AA1B5", "#4B76A4", "#1B365D")
-    edge_colors = ("#8B96A3", "#798594", "#647282", "#4E5E6F", "#476D80", "#34577D", "#102340")
-    cap_fills = ("#F2F4F7", "#DCE2E8", "#BEC7D1", "#E1E7ED", "#DCEAF0", "#D3E1EF", "#CED9E7")
+    # Borderless flat semantic two-scale cool palette: pure neutral cool grays
+    # for detector-free methods (including Ours w/o Detector), academic steel
+    # blues for detector-guided single-agent controls, and deep Prussian/Oxford
+    # Navy (#142F54) as the sole dark visual anchor for CoLayout (Full).
+    colors = ("#E2E7EE", "#C5CED9", "#9EAAB8", "#9BC0E0", "#4D83B3", "#6E7A89", "#142F54")
     with mpl.rc_context({
         "font.family": "serif",
         "font.serif": ["Times New Roman", "STIXGeneral", "DejaVu Serif"],
@@ -147,7 +149,7 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
         "xtick.labelsize": 8.4,
         "ytick.labelsize": 8.0,
         "pdf.fonttype": 42,
-        "axes.linewidth": 0.60,
+        "axes.linewidth": 0.70,
     }):
         fig = Figure(figsize=(7.1, 2.6), dpi=300, facecolor="white")
         FigureCanvasAgg(fig)
@@ -161,7 +163,7 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
         methods = list(METHOD_LABELS.items())
         has_arbiter_cap = False
 
-        # Panel (a): Pre-Arbiter CSR (solid) + Arbiter fallback gain (pale dashed cap).
+        # Panel (a): Pre-Arbiter CSR (borderless flat solid) + Arbiter gain (tinted dashed cap).
         ax_csr, ax_tok = axes
         csr_series = {}
         for i, (method, label) in enumerate(methods):
@@ -173,14 +175,15 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
             csr_series[method] = (positions, pre_vals, fin_vals)
             ax_csr.bar(
                 positions, pre_vals, width=bar_width, label=label,
-                color=colors[i], edgecolor=edge_colors[i], linewidth=0.45, zorder=3,
+                color=colors[i], edgecolor="none", linewidth=0.0, zorder=3,
             )
             if any(d > 1e-6 for d in deltas):
                 has_arbiter_cap = True
                 ax_csr.bar(
                     positions, deltas, bottom=pre_vals, width=bar_width,
-                    color=cap_fills[i], edgecolor=edge_colors[i],
-                    linewidth=0.52, linestyle=(0, (2.2, 1.5)), zorder=3,
+                    facecolor=mcolors.to_rgba(colors[i], 0.18),
+                    edgecolor=colors[i],
+                    linewidth=0.75, linestyle=(0, (2.5, 1.8)), zorder=3,
                 )
 
         title_a = "(a) CSR (%, solid: pre-arbiter; dashed: +arbiter)" if has_arbiter_cap else "(a) Constraint satisfaction (CSR, %)"
@@ -191,33 +194,33 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
         ax_csr.set_ylim(0, 115)
         ax_csr.set_yticks((0, 25, 50, 75, 100))
 
-        # Place pre-arbiter callouts cleanly without colliding with dashed caps or narrow bars.
+        # Place pre-arbiter callouts with crisp contrast and zero collision.
         ours_pos, ours_pre, ours_fin = csr_series["ours_full"]
         for x, p_val, f_val in zip(ours_pos, ours_pre, ours_fin):
             if p_val >= 99.5 and f_val - p_val < 1e-6:
                 ax_csr.text(
                     x, p_val + 2.0, f"{p_val:.0f}", ha="center", va="bottom",
-                    fontsize=6.3, fontweight="bold", color="#1B365D", zorder=4,
+                    fontsize=6.3, fontweight="bold", color="#142F54", zorder=5,
                 )
             elif p_val >= 30.0:
                 ax_csr.text(
                     x, p_val - 4.0, f"{p_val:.0f}", ha="center", va="top",
-                    fontsize=6.0, fontweight="bold", color="white", zorder=4,
+                    fontsize=6.0, fontweight="bold", color="#FFFFFF", zorder=5,
                 )
             else:
                 ax_csr.text(
                     x, max(p_val, f_val) + 2.4, _format_csr_label(p_val), ha="center", va="bottom",
-                    fontsize=6.6, fontweight="bold", color="#1B365D", zorder=4,
+                    fontsize=6.6, fontweight="bold", color="#142F54", zorder=5,
                 )
-        # Highlight the Hard-task three-step pre-arbiter ladder (25 -> 33 -> 75) cleanly inside solid bars.
-        for key in ("single_agent_detector", "single_agent_bb_detector"):
+        # Highlight the Hard-task three-step pre-arbiter ladder (25 -> 33 -> 75) with high contrast.
+        for key, txt_color in (("single_agent_detector", "#1E293B"), ("single_agent_bb_detector", "#FFFFFF")):
             if key in csr_series:
                 pos, pre, _ = csr_series[key]
                 if 15.0 <= pre[2] < 50.0 and ours_pre[2] >= 50.0:
                     ax_csr.text(
                         pos[2], pre[2] - 3.5, f"{pre[2]:.0f}",
                         ha="center", va="top", fontsize=5.8, fontweight="bold",
-                        color="white", zorder=4,
+                        color=txt_color, zorder=5,
                     )
 
         # Panel (b): Mean tokens per completed task.
@@ -229,7 +232,7 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
             tok_series[method] = (positions, values)
             ax_tok.bar(
                 positions, values, width=bar_width, label=label,
-                color=colors[i], edgecolor=edge_colors[i], linewidth=0.45, zorder=3,
+                color=colors[i], edgecolor="none", linewidth=0.0, zorder=3,
             )
 
         ax_tok.set_title("(b) Mean tokens per task", fontsize=8.8, fontweight="bold",
@@ -247,17 +250,17 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
             ax_tok.text(
                 x - bar_width * 0.40, val + y_pad, _format_token_label(val),
                 ha="left", va="bottom", fontsize=6.9, fontweight="bold",
-                color="#1B365D", zorder=4,
+                color="#142F54", zorder=4,
             )
 
         for ax in axes:
             ax.spines[["top", "right"]].set_visible(False)
-            ax.spines["left"].set_color("#475569")
-            ax.spines["bottom"].set_color("#475569")
+            ax.spines["left"].set_color("#64748B")
+            ax.spines["bottom"].set_color("#64748B")
             ax.tick_params(axis="x", length=0, pad=4.5, colors="#1C2D40")
-            ax.tick_params(axis="y", length=2.6, width=0.50, pad=3, colors="#334155")
+            ax.tick_params(axis="y", length=2.6, width=0.55, pad=3, colors="#334155")
             ax.set_axisbelow(True)
-            ax.grid(axis="y", color="#E6EBF0", linewidth=0.45, linestyle="-", zorder=0)
+            ax.grid(axis="y", color="#EDF1F5", linewidth=0.50, linestyle="-", zorder=0)
 
         handles, labels = ax_csr.get_legend_handles_labels()
         fig.legend(

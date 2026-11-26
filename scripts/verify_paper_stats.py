@@ -409,16 +409,44 @@ def main(argv: list[str] | None = None) -> None:
     print("\n=== REPAIR FIDELITY, HARD-BRIEF ZONES & CROSS-ATTRIBUTE REGRESSIONS ===")
     for m in ("ours_full", "single_agent_bb_detector", "single_agent_detector"):
         r0_fin, pre_fin, r0_da = [], [], []
+        arb_briefs = geom_briefs = crop_elems = shift_elems = recolor_elems = 0
+        pre_clip_boxes = arb_added_clips = 0
         for t in task_ids:
             r0, pre, fin, _ = traces[m][t]
             r0_fin.append(_repair_delta(r0, fin))
             pre_fin.append(_repair_delta(pre, fin))
             r0_da.append(_repair_delta(r0, resolve_conflicts(r0, None)))
+            pf, pt, _ = _text_fit_strict_counts(pre, font_path=args.font_path, allow_fallback=args.allow_font_fallback)
+            ff, ft, _ = _text_fit_strict_counts(fin, font_path=args.font_path, allow_fallback=args.allow_font_fallback)
+            pre_clip_boxes += (pt - pf)
+            arb_added_clips += max(0, (ft - ff) - (pt - pf))
+            if any(h.get("role") == "Priority Arbiter" for h in records[m][t]["history"]):
+                arb_briefs += 1
+                pm = {e.id: e for e in pre.elements}
+                fm = {e.id: e for e in fin.elements}
+                g_any = False
+                for eid in pm:
+                    a, b = pm[eid], fm[eid]
+                    if a.w != b.w or a.h != b.h:
+                        crop_elems += 1; g_any = True
+                    elif a.x != b.x or a.y != b.y:
+                        shift_elems += 1; g_any = True
+                    if a.fg_color != b.fg_color:
+                        recolor_elems += 1
+                if g_any:
+                    geom_briefs += 1
         print(
             f"  {m:<26}: R0->Final disp={fmean(d for d, _ in r0_fin):.2f}px, "
             f"net B/W={fmean(b for _, b in r0_fin):.2f}/brief (arbiter-only={fmean(b for _, b in pre_fin):.2f}), "
-            f"R0->DirectArb B/W={fmean(b for _, b in r0_da):.2f}/brief"
+            f"R0->DirectArb B/W={fmean(b for _, b in r0_da):.2f}/brief | "
+            f"arbiter={arb_briefs}/36 (geom_br={geom_briefs}, crop={crop_elems}, shift={shift_elems}, recolor={recolor_elems}) | "
+            f"clipped={pre_clip_boxes}+arb{arb_added_clips}"
         )
+    print("  LLM calls/run: " + ", ".join(
+        f"{m}={fmean(sum(1 for h in records[m][t]['history'] if 'token_usage' in h) for t in task_ids):.2f}"
+        f"({sum(sum(1 for h in records[m][t]['history'] if 'token_usage' in h) for t in task_ids)})"
+        for m in METHODS
+    ))
     sa_da = [_repair_delta(LayoutState.model_validate(records["single_agent"][t]["final_state"]),
                            resolve_conflicts(LayoutState.model_validate(records["single_agent"][t]["final_state"]), None))
              for t in task_ids]

@@ -26,7 +26,7 @@ def test_tables_weight_task_means_and_bold_displayed_ties(tmp_path):
     assert rows["Single-Agent"][0] == r"\textbf{0.0}"
     assert rows["Self-Refine"][0] == "1.0"
     assert rows["Single-Agent"][4] == rows["Self-Refine"][4] == r"\textbf{25.0}"
-    assert rows["Single-Agent"][5] == rows["Self-Refine"][5] == r"\textbf{25.0}"
+    assert rows["Single-Agent"][5] == rows["Self-Refine"][5] == "25.0"
     assert rows["Single-Agent"][7].startswith(r"\textbf{1,234}")
     by_difficulty = (tmp_path / "table_difficulty.tex").read_text()
     assert by_difficulty.count(r"\multicolumn{2}{c}") == 3
