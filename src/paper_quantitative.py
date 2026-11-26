@@ -82,8 +82,9 @@ def write_tables(groups: dict, tables_dir: Path, *, mock: bool = False) -> None:
         r"\begin{table*}[t]", r"\centering",
         r"\caption{" + provenance + f"Mean layout scores and costs over "
         f"{sum(groups['single_agent', d]['n_tasks'] for d in LEVELS)} tasks. "
-        r"Pre-CSR reports hard constraint satisfaction before priority arbitration; "
-        "bold entries are best at the displayed precision.}",
+        r"OR, BOR, CPR, AS, and CSR evaluate terminal states; Pre-CSR is "
+        r"pre-arbitration; Tokens average completed runs (failed retries reported "
+        r"separately). Bold marks best.}",
         r"\label{tab:main}", r"\small",
         r"\begin{tabular}{@{}lrrrrrrrr@{}}", r"\toprule",
         " & ".join(["Method", *headings]) + r" \\", r"\midrule",
