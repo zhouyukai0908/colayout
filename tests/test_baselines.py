@@ -2,7 +2,10 @@ import json
 
 import pytest
 
-from src.methods import common, naive_multi_agent, self_refine, single_agent, single_agent_detector
+from src.methods import (
+    common, naive_multi_agent, self_refine, single_agent,
+    single_agent_bb_detector, single_agent_detector,
+)
 
 
 BRIEF = {
@@ -225,3 +228,53 @@ def test_single_agent_detector_repairs_from_deterministic_conflicts_and_falls_ba
     assert report2["metrics"]["CSR"] == 1.0
     assert report2["history"][-1]["role"] == "Priority Arbiter"
     assert report2["final_state"]["elements"][0]["x"] == 0.0
+
+
+def test_single_agent_bb_detector_programmatic_copy_union_allowed_ids_and_arbiter():
+    from src.export_results import _pre_arbiter_csr
+
+    brief = {
+        "task_id": "bb_test", "domain": "poster", "difficulty": "easy",
+        "canvas_width": 200, "canvas_height": 200, "canvas_bg_color": "#FFFFFF",
+        "required_elements": [
+            {"id": "headline", "type": "title", "text_or_desc": "Hello World"},
+            {"id": "note", "type": "body", "text_or_desc": "Keep verbatim"},
+            {"id": "ok_tag", "type": "tag", "text_or_desc": "Clean"},
+        ],
+        "design_notes": "Keep text legible.",
+    }
+    # Round 0: omit text (injected programmatically), headline overflows, note has white-on-white contrast fail,
+    # ok_tag is clean (must NOT appear in round-1 allowed_ids).
+    r0 = {"updates": [
+        {"id": "headline", "x": -10, "y": 10, "w": 80, "h": 30, "z_index": 1, "font_size": 24, "fg_color": "#111111"},
+        {"id": "note", "x": 10, "y": 60, "w": 80, "h": 25, "z_index": 1, "font_size": 14, "fg_color": "#FFFFFF"},
+        {"id": "ok_tag", "x": 10, "y": 120, "w": 60, "h": 20, "z_index": 1, "font_size": 12, "fg_color": "#000000"},
+    ]}
+    # Round 1: fix BOTH geometry (headline x) and style (note fg_color) in one partial patch;
+    # attempt to touch non-allowed ok_tag and overwrite text -> both must be ignored!
+    r1 = {"updates": [
+        {"id": "headline", "x": 10, "text": "TAMPERED"},
+        {"id": "note", "fg_color": "#111111"},
+        {"id": "ok_tag", "x": 99},
+    ]}
+    llm = ScriptedLLM(r0, r1)
+    report = single_agent_bb_detector.run_method(brief, llm, max_rounds=5)
+    assert report["rounds_used"] == 2
+    assert report["metrics"]["CSR"] == 1.0
+    assert all(e["role"] != "Priority Arbiter" for e in report["history"])
+    # Check exact union of allowed_ids passed to Round 1 prompt
+    r1_payload = json.loads(llm.calls[1][-1]["content"])
+    assert r1_payload["allowed_ids"] == ["headline", "note"]
+    by_id = {e["id"]: e for e in report["final_state"]["elements"]}
+    assert by_id["headline"]["text"] == "Hello World"
+    assert by_id["note"]["text"] == "Keep verbatim"
+    assert by_id["ok_tag"]["x"] == 10.0  # untouched because not in allowed_ids
+    assert _pre_arbiter_csr({**report, "method": "single_agent_bb_detector"}, brief) == 1.0
+
+    # Case 2: exhausts K=1 and falls back to Priority Arbiter; _pre_arbiter_csr must replay 0.0
+    llm2 = ScriptedLLM(r0, {"updates": [{"id": "headline", "x": -5}]})
+    report2 = single_agent_bb_detector.run_method(brief, llm2, max_rounds=1)
+    assert report2["rounds_used"] == 2
+    assert report2["metrics"]["CSR"] == 1.0
+    assert report2["history"][-1]["role"] == "Priority Arbiter"
+    assert _pre_arbiter_csr({**report2, "method": "single_agent_bb_detector"}, brief) == 0.0

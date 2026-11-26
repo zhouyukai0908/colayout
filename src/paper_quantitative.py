@@ -9,6 +9,7 @@ METHOD_LABELS = {
     "self_refine": "Self-Refine",
     "naive_multi_agent": "Naive Multi-Agent",
     "single_agent_detector": "Single-Agent + Det.",
+    "single_agent_bb_detector": "Single-Agent + BB + Det.",
     "ours_no_detector": "Ours w/o Detector",
     "ours_full": "CoLayout (Full)",
 }
@@ -85,7 +86,7 @@ def write_tables(groups: dict, tables_dir: Path, *, mock: bool = False) -> None:
         r"OR, BOR, CPR, AS, and CSR evaluate terminal states; Pre-CSR is "
         r"pre-arbitration; Tokens average completed runs (failed retries reported "
         r"separately). Bold marks best.}",
-        r"\label{tab:main}", r"\small",
+        r"\label{tab:main}", r"\small", r"\setlength{\tabcolsep}{4.8pt}",
         r"\begin{tabular}{@{}lrrrrrrrr@{}}", r"\toprule",
         " & ".join(["Method", *headings]) + r" \\", r"\midrule",
         *_table_rows(overall_cells),
@@ -100,7 +101,7 @@ def write_tables(groups: dict, tables_dir: Path, *, mock: bool = False) -> None:
     difficulty = [
         r"\begin{table}[t]", r"\centering",
         r"\caption{" + provenance + r"Pre-arbiter hard constraint satisfaction (Pre-CSR, \%) and mean token use by difficulty. "
-        r"After priority arbitration, both detector-guided methods reach 100.0\% CSR across all levels "
+        r"After priority arbitration, all three detector-guided methods reach 100.0\% CSR across all levels "
         r"(Ours w/o Detector: 75.0\%, 33.3\%, 0.0\%). Bold marks highest Pre-CSR and lowest tokens per level.}",
         r"\label{tab:difficulty}", r"\footnotesize", r"\setlength{\tabcolsep}{2pt}",
         r"\resizebox{\columnwidth}{!}{%", r"\begin{tabular}{@{}lrrrrrr@{}}", r"\toprule",
@@ -131,11 +132,12 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
 
     figures_dir = Path(figures_dir)
     figures_dir.mkdir(parents=True, exist_ok=True)
-    # Calm academic palette: four monotonic neutral grays for external / single-agent baselines,
-    # muted steel blue for our detector ablation, and deep navy for CoLayout (Full).
-    colors = ("#F0F3F6", "#D6DCE3", "#B2BDC8", "#8392A3", "#5E86AD", "#1B365D")
-    edge_colors = ("#8B96A3", "#798594", "#667484", "#4D5D6E", "#3E5F80", "#102340")
-    cap_fills = ("#F0F3F6", "#D6DCE3", "#B2BDC8", "#DCE2E8", "#D7E3EF", "#CED9E7")
+    # Calm academic palette: four monotonic neutral grays for monolithic baselines,
+    # muted teal-slate for the single-agent blackboard ablation, steel blue for our
+    # detector ablation, and deep navy for CoLayout (Full).
+    colors = ("#F2F4F7", "#DCE2E8", "#BEC7D1", "#94A3B3", "#7AA1B5", "#4B76A4", "#1B365D")
+    edge_colors = ("#8B96A3", "#798594", "#647282", "#4E5E6F", "#476D80", "#34577D", "#102340")
+    cap_fills = ("#F2F4F7", "#DCE2E8", "#BEC7D1", "#E1E7ED", "#DCEAF0", "#D3E1EF", "#CED9E7")
     with mpl.rc_context({
         "font.family": "serif",
         "font.serif": ["Times New Roman", "STIXGeneral", "DejaVu Serif"],
@@ -151,11 +153,11 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
         FigureCanvasAgg(fig)
         axes = fig.subplots(1, 2)
         fig.subplots_adjust(
-            left=0.068, right=0.988, top=0.77,
-            bottom=0.185 if mock else 0.14, wspace=0.22,
+            left=0.068, right=0.988, top=0.72,
+            bottom=0.185 if mock else 0.135, wspace=0.22,
         )
-        bar_step = 0.136
-        bar_width = 0.116
+        bar_step = 0.118
+        bar_width = 0.100
         methods = list(METHOD_LABELS.items())
         has_arbiter_cap = False
 
@@ -185,33 +187,38 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
         ax_csr.set_title(title_a, fontsize=8.8, fontweight="bold",
                          color="#1C2D40", loc="left", pad=6)
         ax_csr.set_xticks(range(len(LEVELS)), [level.title() for level in LEVELS])
-        ax_csr.set_xlim(-0.54, len(LEVELS) - 0.46)
-        ax_csr.set_ylim(0, 114)
+        ax_csr.set_xlim(-0.53, len(LEVELS) - 0.47)
+        ax_csr.set_ylim(0, 115)
         ax_csr.set_yticks((0, 25, 50, 75, 100))
 
-        # Place pre-arbiter callouts cleanly inside solid bars so they never collide with dashed caps.
+        # Place pre-arbiter callouts cleanly without colliding with dashed caps or narrow bars.
         ours_pos, ours_pre, ours_fin = csr_series["ours_full"]
         for x, p_val, f_val in zip(ours_pos, ours_pre, ours_fin):
-            if p_val >= 30.0:
-                txt = f"{p_val:.0f}"
+            if p_val >= 99.5 and f_val - p_val < 1e-6:
                 ax_csr.text(
-                    x, p_val - 4.0, txt, ha="center", va="top",
-                    fontsize=5.7 if len(txt) >= 3 else 6.6,
-                    fontweight="bold", color="white", zorder=4,
+                    x, p_val + 2.0, f"{p_val:.0f}", ha="center", va="bottom",
+                    fontsize=6.3, fontweight="bold", color="#1B365D", zorder=4,
+                )
+            elif p_val >= 30.0:
+                ax_csr.text(
+                    x, p_val - 4.0, f"{p_val:.0f}", ha="center", va="top",
+                    fontsize=6.0, fontweight="bold", color="white", zorder=4,
                 )
             else:
                 ax_csr.text(
                     x, max(p_val, f_val) + 2.4, _format_csr_label(p_val), ha="center", va="bottom",
-                    fontsize=7.0, fontweight="bold", color="#1B365D", zorder=4,
+                    fontsize=6.6, fontweight="bold", color="#1B365D", zorder=4,
                 )
-        sad_pos, sad_pre, _ = csr_series["single_agent_detector"]
-        # Highlight the sharp Hard-task pre-arbiter gap (25 vs 75) cleanly inside the solid slate bar.
-        if 15.0 <= sad_pre[2] < 50.0 and ours_pre[2] >= 50.0:
-            ax_csr.text(
-                sad_pos[2], sad_pre[2] - 4.0, f"{sad_pre[2]:.0f}",
-                ha="center", va="top", fontsize=6.5, fontweight="bold",
-                color="white", zorder=4,
-            )
+        # Highlight the Hard-task three-step pre-arbiter ladder (25 -> 33 -> 75) cleanly inside solid bars.
+        for key in ("single_agent_detector", "single_agent_bb_detector"):
+            if key in csr_series:
+                pos, pre, _ = csr_series[key]
+                if 15.0 <= pre[2] < 50.0 and ours_pre[2] >= 50.0:
+                    ax_csr.text(
+                        pos[2], pre[2] - 3.5, f"{pre[2]:.0f}",
+                        ha="center", va="top", fontsize=5.8, fontweight="bold",
+                        color="white", zorder=4,
+                    )
 
         # Panel (b): Mean tokens per completed task.
         tok_series = {}
@@ -228,7 +235,7 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
         ax_tok.set_title("(b) Mean tokens per task", fontsize=8.8, fontweight="bold",
                          color="#1C2D40", loc="left", pad=6)
         ax_tok.set_xticks(range(len(LEVELS)), [level.title() for level in LEVELS])
-        ax_tok.set_xlim(-0.54, len(LEVELS) - 0.46)
+        ax_tok.set_xlim(-0.53, len(LEVELS) - 0.47)
         peak = max(v for _, vals in tok_series.values() for v in vals)
         top_limit = max(peak * 1.13, 1.0)
         ax_tok.set_ylim(0, top_limit)
@@ -238,8 +245,8 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
         y_pad = top_limit * 0.022
         for x, val in zip(ours_tpos, ours_tvals):
             ax_tok.text(
-                x - bar_width * 0.35, val + y_pad, _format_token_label(val),
-                ha="left", va="bottom", fontsize=7.2, fontweight="bold",
+                x - bar_width * 0.40, val + y_pad, _format_token_label(val),
+                ha="left", va="bottom", fontsize=6.9, fontweight="bold",
                 color="#1B365D", zorder=4,
             )
 
@@ -254,9 +261,9 @@ def plot_performance(groups: dict, figures_dir: Path, *, mock: bool = False) -> 
 
         handles, labels = ax_csr.get_legend_handles_labels()
         fig.legend(
-            handles, labels, loc="upper center", bbox_to_anchor=(0.515, 0.985),
-            ncol=6, fontsize=7.3, handlelength=1.10, handleheight=0.78,
-            handletextpad=0.38, columnspacing=0.95, frameon=False,
+            handles, labels, loc="upper center", bbox_to_anchor=(0.515, 0.992),
+            ncol=4, fontsize=7.2, handlelength=1.10, handleheight=0.76,
+            handletextpad=0.38, columnspacing=1.05, labelspacing=0.28, frameon=False,
         )
         if mock:
             fig.text(0.068, 0.025, "Offline mock data", fontsize=7.5, style="italic", color="#475569")

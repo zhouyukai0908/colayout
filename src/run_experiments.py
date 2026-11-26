@@ -24,7 +24,8 @@ if __package__ in (None, ""):
 from src.generate_briefs import DEFAULT_PATH, generate_briefs
 from src.llm_client import InvalidCompletion, LLMClient, model_name
 from src.methods import (
-    naive_multi_agent, ours_full, ours_no_detector, self_refine, single_agent, single_agent_detector,
+    naive_multi_agent, ours_full, ours_no_detector, self_refine, single_agent,
+    single_agent_bb_detector, single_agent_detector,
 )
 
 
@@ -33,6 +34,7 @@ METHODS = {
     "self_refine": self_refine.run_method,
     "naive_multi_agent": naive_multi_agent.run_method,
     "single_agent_detector": single_agent_detector.run_method,
+    "single_agent_bb_detector": single_agent_bb_detector.run_method,
     "ours_no_detector": ours_no_detector.run_method,
     "ours_full": ours_full.run_method,
 }

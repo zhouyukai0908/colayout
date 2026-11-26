@@ -18,6 +18,12 @@ if __package__ in (None, ""):
 from src.detector import evaluate_layout
 from src.generate_briefs import DEFAULT_PATH, generate_briefs
 from src.methods.blackboard import ARCHITECT, GEOMETRY, STYLE, VISUAL, _initial_geometry, _patched
+from src.methods.single_agent_bb_detector import (
+    ALL_FIELDS as BB_ALL_FIELDS,
+    CONFLICT_TYPES as BB_CONFLICT_TYPES,
+    DESIGNER as BB_DESIGNER,
+    _initial_all_fields,
+)
 from src.run_experiments import MEAN_FIELDS, METHODS, METRICS
 from src.schema import Conflict, LayoutState
 
@@ -36,6 +42,26 @@ def _pre_arbiter_csr(row: dict, brief: dict) -> float:
             return float(row["metrics"]["CSR"])
         state = LayoutState.model_validate(designer_turns[-1]["response"])
         return float(evaluate_layout(state)["metrics"]["CSR"])
+    if method == "single_agent_bb_detector":
+        state = None
+        last_hard: list[Conflict] = []
+        for entry in history:
+            role = entry.get("role")
+            rnd = entry.get("round")
+            if role == BB_DESIGNER and rnd == 0:
+                state = _initial_all_fields(entry["response"], brief)
+            elif role == "Compliance Critic" and isinstance(entry.get("conflicts"), list):
+                last_hard = [
+                    Conflict.model_validate(c) for c in entry["conflicts"] if c.get("severity") == "hard"
+                ]
+            elif role == BB_DESIGNER and isinstance(rnd, int) and rnd >= 1 and state is not None:
+                routed = [c for c in last_hard if c.conflict_type in BB_CONFLICT_TYPES]
+                ids = {i for c in routed for i in c.element_ids}
+                state = _patched(entry["response"], state, brief, ids, BB_ALL_FIELDS)
+            elif role == "Priority Arbiter":
+                break
+        if state is not None:
+            return float(evaluate_layout(state)["metrics"]["CSR"])
     if method in ("ours_full", "ours_no_detector"):
         state = None
         last_hard: list[Conflict] = []
