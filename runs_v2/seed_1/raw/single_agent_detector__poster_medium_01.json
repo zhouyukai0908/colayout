@@ -1,0 +1,1003 @@
+{
+  "final_state": {
+    "canvas": {
+      "width": 560,
+      "height": 720,
+      "bg_color": "#FFF9ED"
+    },
+    "elements": [
+      {
+        "id": "panel",
+        "type": "card",
+        "x": 20.0,
+        "y": 100.0,
+        "w": 520.0,
+        "h": 520.0,
+        "z_index": 0,
+        "text": null,
+        "font_size": null,
+        "fg_color": "#000000",
+        "bg_color": null
+      },
+      {
+        "id": "headline",
+        "type": "title",
+        "x": 40.0,
+        "y": 120.0,
+        "w": 480.0,
+        "h": 60.0,
+        "z_index": 1,
+        "text": "Print the Tide",
+        "font_size": 48,
+        "fg_color": "#000000",
+        "bg_color": null
+      },
+      {
+        "id": "subhead",
+        "type": "subtitle",
+        "x": 40.0,
+        "y": 190.0,
+        "w": 480.0,
+        "h": 40.0,
+        "z_index": 1,
+        "text": "Two-color linocut workshop",
+        "font_size": 24,
+        "fg_color": "#333333",
+        "bg_color": null
+      },
+      {
+        "id": "description",
+        "type": "body",
+        "x": 40.0,
+        "y": 240.0,
+        "w": 480.0,
+        "h": 80.0,
+        "z_index": 1,
+        "text": "Carve a coastal motif and take home three hand-pulled prints.",
+        "font_size": 16,
+        "fg_color": "#555555",
+        "bg_color": null
+      },
+      {
+        "id": "visual",
+        "type": "image",
+        "x": 40.0,
+        "y": 340.0,
+        "w": 480.0,
+        "h": 160.0,
+        "z_index": 1,
+        "text": "Ink rollers and a blue wave print",
+        "font_size": null,
+        "fg_color": "#000000",
+        "bg_color": null
+      },
+      {
+        "id": "tag_1",
+        "type": "tag",
+        "x": 40.0,
+        "y": 520.0,
+        "w": 100.0,
+        "h": 30.0,
+        "z_index": 1,
+        "text": "Studio B",
+        "font_size": 14,
+        "fg_color": "#000000",
+        "bg_color": "#007BFF"
+      },
+      {
+        "id": "primary_action",
+        "type": "button",
+        "x": 420.0,
+        "y": 520.0,
+        "w": 120.0,
+        "h": 40.0,
+        "z_index": 1,
+        "text": "Book a place",
+        "font_size": 16,
+        "fg_color": "#000000",
+        "bg_color": "#FF5733"
+      }
+    ],
+    "version": 1
+  },
+  "metrics": {
+    "OR": 0.0,
+    "BOR": 0.0,
+    "CPR": 1.0,
+    "AS": 0.8333333333333334,
+    "CSR": 1.0
+  },
+  "conflicts": [],
+  "rounds_used": 6,
+  "total_tokens": 10508,
+  "history": [
+    {
+      "round": 0,
+      "role": "Layout Designer",
+      "response": {
+        "canvas": {
+          "width": 560,
+          "height": 720,
+          "bg_color": "#FFF9ED"
+        },
+        "elements": [
+          {
+            "id": "panel",
+            "type": "card",
+            "x": 20,
+            "y": 100,
+            "w": 520,
+            "h": 520,
+            "z_index": 0
+          },
+          {
+            "id": "headline",
+            "type": "title",
+            "text": "Print the Tide",
+            "x": 40,
+            "y": 120,
+            "w": 480,
+            "h": 60,
+            "font_size": 48,
+            "fg_color": "#000000",
+            "z_index": 1
+          },
+          {
+            "id": "subhead",
+            "type": "subtitle",
+            "text": "Two-color linocut workshop",
+            "x": 40,
+            "y": 190,
+            "w": 480,
+            "h": 40,
+            "font_size": 24,
+            "fg_color": "#333333",
+            "z_index": 1
+          },
+          {
+            "id": "description",
+            "type": "body",
+            "text": "Carve a coastal motif and take home three hand-pulled prints.",
+            "x": 40,
+            "y": 240,
+            "w": 480,
+            "h": 80,
+            "font_size": 16,
+            "fg_color": "#555555",
+            "z_index": 1
+          },
+          {
+            "id": "visual",
+            "type": "image",
+            "text": "Ink rollers and a blue wave print",
+            "x": 40,
+            "y": 340,
+            "w": 480,
+            "h": 160,
+            "bg_color": null,
+            "z_index": 1
+          },
+          {
+            "id": "tag_1",
+            "type": "tag",
+            "text": "Studio B",
+            "x": 40,
+            "y": 520,
+            "w": 100,
+            "h": 30,
+            "font_size": 14,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#007BFF",
+            "z_index": 1
+          },
+          {
+            "id": "primary_action",
+            "type": "button",
+            "text": "Book a place",
+            "x": 420,
+            "y": 520,
+            "w": 120,
+            "h": 40,
+            "font_size": 16,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#FF5733",
+            "z_index": 1
+          }
+        ],
+        "version": 0
+      },
+      "token_usage": {
+        "prompt_tokens": 523,
+        "completion_tokens": 610,
+        "total_tokens": 1133
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_e4c064397f",
+      "format_rejections": 0,
+      "state_version": 0
+    },
+    {
+      "round": 0,
+      "role": "Compliance Critic",
+      "state_version": 0,
+      "conflicts": [
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "tag_1"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.979395412917911 is below the required 4.5.",
+          "numeric_value": 3.979395412917911
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.151695004131001 is below the required 4.5.",
+          "numeric_value": 3.151695004131001
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "role": "Layout Designer",
+      "response": {
+        "canvas": {
+          "width": 560,
+          "height": 720,
+          "bg_color": "#FFF9ED"
+        },
+        "elements": [
+          {
+            "id": "panel",
+            "type": "card",
+            "x": 20.0,
+            "y": 100.0,
+            "w": 520.0,
+            "h": 520.0,
+            "z_index": 0,
+            "text": null,
+            "font_size": null,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "headline",
+            "type": "title",
+            "x": 40.0,
+            "y": 120.0,
+            "w": 480.0,
+            "h": 60.0,
+            "z_index": 1,
+            "text": "Print the Tide",
+            "font_size": 48,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "subhead",
+            "type": "subtitle",
+            "x": 40.0,
+            "y": 190.0,
+            "w": 480.0,
+            "h": 40.0,
+            "z_index": 1,
+            "text": "Two-color linocut workshop",
+            "font_size": 24,
+            "fg_color": "#333333",
+            "bg_color": null
+          },
+          {
+            "id": "description",
+            "type": "body",
+            "x": 40.0,
+            "y": 240.0,
+            "w": 480.0,
+            "h": 80.0,
+            "z_index": 1,
+            "text": "Carve a coastal motif and take home three hand-pulled prints.",
+            "font_size": 16,
+            "fg_color": "#555555",
+            "bg_color": null
+          },
+          {
+            "id": "visual",
+            "type": "image",
+            "x": 40.0,
+            "y": 340.0,
+            "w": 480.0,
+            "h": 160.0,
+            "z_index": 1,
+            "text": "Ink rollers and a blue wave print",
+            "font_size": null,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "tag_1",
+            "type": "tag",
+            "x": 40.0,
+            "y": 520.0,
+            "w": 100.0,
+            "h": 30.0,
+            "z_index": 1,
+            "text": "Studio B",
+            "font_size": 14,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#007BFF"
+          },
+          {
+            "id": "primary_action",
+            "type": "button",
+            "x": 420.0,
+            "y": 520.0,
+            "w": 120.0,
+            "h": 40.0,
+            "z_index": 1,
+            "text": "Book a place",
+            "font_size": 16,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#FF5733"
+          }
+        ],
+        "version": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 1143,
+        "completion_tokens": 732,
+        "total_tokens": 1875
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "base_version": 0,
+      "state_version": 0
+    },
+    {
+      "round": 1,
+      "role": "Compliance Critic",
+      "state_version": 0,
+      "conflicts": [
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "tag_1"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.979395412917911 is below the required 4.5.",
+          "numeric_value": 3.979395412917911
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.151695004131001 is below the required 4.5.",
+          "numeric_value": 3.151695004131001
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "role": "Layout Designer",
+      "response": {
+        "canvas": {
+          "width": 560,
+          "height": 720,
+          "bg_color": "#FFF9ED"
+        },
+        "elements": [
+          {
+            "id": "panel",
+            "type": "card",
+            "x": 20.0,
+            "y": 100.0,
+            "w": 520.0,
+            "h": 520.0,
+            "z_index": 0,
+            "text": null,
+            "font_size": null,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "headline",
+            "type": "title",
+            "x": 40.0,
+            "y": 120.0,
+            "w": 480.0,
+            "h": 60.0,
+            "z_index": 1,
+            "text": "Print the Tide",
+            "font_size": 48,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "subhead",
+            "type": "subtitle",
+            "x": 40.0,
+            "y": 190.0,
+            "w": 480.0,
+            "h": 40.0,
+            "z_index": 1,
+            "text": "Two-color linocut workshop",
+            "font_size": 24,
+            "fg_color": "#333333",
+            "bg_color": null
+          },
+          {
+            "id": "description",
+            "type": "body",
+            "x": 40.0,
+            "y": 240.0,
+            "w": 480.0,
+            "h": 80.0,
+            "z_index": 1,
+            "text": "Carve a coastal motif and take home three hand-pulled prints.",
+            "font_size": 16,
+            "fg_color": "#555555",
+            "bg_color": null
+          },
+          {
+            "id": "visual",
+            "type": "image",
+            "x": 40.0,
+            "y": 340.0,
+            "w": 480.0,
+            "h": 160.0,
+            "z_index": 1,
+            "text": "Ink rollers and a blue wave print",
+            "font_size": null,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "tag_1",
+            "type": "tag",
+            "x": 40.0,
+            "y": 520.0,
+            "w": 100.0,
+            "h": 30.0,
+            "z_index": 1,
+            "text": "Studio B",
+            "font_size": 14,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#007BFF"
+          },
+          {
+            "id": "primary_action",
+            "type": "button",
+            "x": 420.0,
+            "y": 520.0,
+            "w": 120.0,
+            "h": 40.0,
+            "z_index": 1,
+            "text": "Book a place",
+            "font_size": 16,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#FF5733"
+          }
+        ],
+        "version": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 1143,
+        "completion_tokens": 732,
+        "total_tokens": 1875
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "base_version": 0,
+      "state_version": 0
+    },
+    {
+      "round": 2,
+      "role": "Compliance Critic",
+      "state_version": 0,
+      "conflicts": [
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "tag_1"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.979395412917911 is below the required 4.5.",
+          "numeric_value": 3.979395412917911
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.151695004131001 is below the required 4.5.",
+          "numeric_value": 3.151695004131001
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "role": "Layout Designer",
+      "response": {
+        "canvas": {
+          "width": 560,
+          "height": 720,
+          "bg_color": "#FFF9ED"
+        },
+        "elements": [
+          {
+            "id": "panel",
+            "type": "card",
+            "x": 20.0,
+            "y": 100.0,
+            "w": 520.0,
+            "h": 520.0,
+            "z_index": 0,
+            "text": null,
+            "font_size": null,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "headline",
+            "type": "title",
+            "x": 40.0,
+            "y": 120.0,
+            "w": 480.0,
+            "h": 60.0,
+            "z_index": 1,
+            "text": "Print the Tide",
+            "font_size": 48,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "subhead",
+            "type": "subtitle",
+            "x": 40.0,
+            "y": 190.0,
+            "w": 480.0,
+            "h": 40.0,
+            "z_index": 1,
+            "text": "Two-color linocut workshop",
+            "font_size": 24,
+            "fg_color": "#333333",
+            "bg_color": null
+          },
+          {
+            "id": "description",
+            "type": "body",
+            "x": 40.0,
+            "y": 240.0,
+            "w": 480.0,
+            "h": 80.0,
+            "z_index": 1,
+            "text": "Carve a coastal motif and take home three hand-pulled prints.",
+            "font_size": 16,
+            "fg_color": "#555555",
+            "bg_color": null
+          },
+          {
+            "id": "visual",
+            "type": "image",
+            "x": 40.0,
+            "y": 340.0,
+            "w": 480.0,
+            "h": 160.0,
+            "z_index": 1,
+            "text": "Ink rollers and a blue wave print",
+            "font_size": null,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "tag_1",
+            "type": "tag",
+            "x": 40.0,
+            "y": 520.0,
+            "w": 100.0,
+            "h": 30.0,
+            "z_index": 1,
+            "text": "Studio B",
+            "font_size": 14,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#007BFF"
+          },
+          {
+            "id": "primary_action",
+            "type": "button",
+            "x": 420.0,
+            "y": 520.0,
+            "w": 120.0,
+            "h": 40.0,
+            "z_index": 1,
+            "text": "Book a place",
+            "font_size": 16,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#FF5733"
+          }
+        ],
+        "version": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 1143,
+        "completion_tokens": 732,
+        "total_tokens": 1875
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "base_version": 0,
+      "state_version": 0
+    },
+    {
+      "round": 3,
+      "role": "Compliance Critic",
+      "state_version": 0,
+      "conflicts": [
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "tag_1"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.979395412917911 is below the required 4.5.",
+          "numeric_value": 3.979395412917911
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.151695004131001 is below the required 4.5.",
+          "numeric_value": 3.151695004131001
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "role": "Layout Designer",
+      "response": {
+        "canvas": {
+          "width": 560,
+          "height": 720,
+          "bg_color": "#FFF9ED"
+        },
+        "elements": [
+          {
+            "id": "panel",
+            "type": "card",
+            "x": 20.0,
+            "y": 100.0,
+            "w": 520.0,
+            "h": 520.0,
+            "z_index": 0,
+            "text": null,
+            "font_size": null,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "headline",
+            "type": "title",
+            "x": 40.0,
+            "y": 120.0,
+            "w": 480.0,
+            "h": 60.0,
+            "z_index": 1,
+            "text": "Print the Tide",
+            "font_size": 48,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "subhead",
+            "type": "subtitle",
+            "x": 40.0,
+            "y": 190.0,
+            "w": 480.0,
+            "h": 40.0,
+            "z_index": 1,
+            "text": "Two-color linocut workshop",
+            "font_size": 24,
+            "fg_color": "#333333",
+            "bg_color": null
+          },
+          {
+            "id": "description",
+            "type": "body",
+            "x": 40.0,
+            "y": 240.0,
+            "w": 480.0,
+            "h": 80.0,
+            "z_index": 1,
+            "text": "Carve a coastal motif and take home three hand-pulled prints.",
+            "font_size": 16,
+            "fg_color": "#555555",
+            "bg_color": null
+          },
+          {
+            "id": "visual",
+            "type": "image",
+            "x": 40.0,
+            "y": 340.0,
+            "w": 480.0,
+            "h": 160.0,
+            "z_index": 1,
+            "text": "Ink rollers and a blue wave print",
+            "font_size": null,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "tag_1",
+            "type": "tag",
+            "x": 40.0,
+            "y": 520.0,
+            "w": 100.0,
+            "h": 30.0,
+            "z_index": 1,
+            "text": "Studio B",
+            "font_size": 14,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#007BFF"
+          },
+          {
+            "id": "primary_action",
+            "type": "button",
+            "x": 420.0,
+            "y": 520.0,
+            "w": 120.0,
+            "h": 40.0,
+            "z_index": 1,
+            "text": "Book a place",
+            "font_size": 16,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#FF5733"
+          }
+        ],
+        "version": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 1143,
+        "completion_tokens": 732,
+        "total_tokens": 1875
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "base_version": 0,
+      "state_version": 0
+    },
+    {
+      "round": 4,
+      "role": "Compliance Critic",
+      "state_version": 0,
+      "conflicts": [
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "tag_1"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.979395412917911 is below the required 4.5.",
+          "numeric_value": 3.979395412917911
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.151695004131001 is below the required 4.5.",
+          "numeric_value": 3.151695004131001
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "role": "Layout Designer",
+      "response": {
+        "canvas": {
+          "width": 560,
+          "height": 720,
+          "bg_color": "#FFF9ED"
+        },
+        "elements": [
+          {
+            "id": "panel",
+            "type": "card",
+            "x": 20.0,
+            "y": 100.0,
+            "w": 520.0,
+            "h": 520.0,
+            "z_index": 0,
+            "text": null,
+            "font_size": null,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "headline",
+            "type": "title",
+            "x": 40.0,
+            "y": 120.0,
+            "w": 480.0,
+            "h": 60.0,
+            "z_index": 1,
+            "text": "Print the Tide",
+            "font_size": 48,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "subhead",
+            "type": "subtitle",
+            "x": 40.0,
+            "y": 190.0,
+            "w": 480.0,
+            "h": 40.0,
+            "z_index": 1,
+            "text": "Two-color linocut workshop",
+            "font_size": 24,
+            "fg_color": "#333333",
+            "bg_color": null
+          },
+          {
+            "id": "description",
+            "type": "body",
+            "x": 40.0,
+            "y": 240.0,
+            "w": 480.0,
+            "h": 80.0,
+            "z_index": 1,
+            "text": "Carve a coastal motif and take home three hand-pulled prints.",
+            "font_size": 16,
+            "fg_color": "#555555",
+            "bg_color": null
+          },
+          {
+            "id": "visual",
+            "type": "image",
+            "x": 40.0,
+            "y": 340.0,
+            "w": 480.0,
+            "h": 160.0,
+            "z_index": 1,
+            "text": "Ink rollers and a blue wave print",
+            "font_size": null,
+            "fg_color": "#000000",
+            "bg_color": null
+          },
+          {
+            "id": "tag_1",
+            "type": "tag",
+            "x": 40.0,
+            "y": 520.0,
+            "w": 100.0,
+            "h": 30.0,
+            "z_index": 1,
+            "text": "Studio B",
+            "font_size": 14,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#007BFF"
+          },
+          {
+            "id": "primary_action",
+            "type": "button",
+            "x": 420.0,
+            "y": 520.0,
+            "w": 120.0,
+            "h": 40.0,
+            "z_index": 1,
+            "text": "Book a place",
+            "font_size": 16,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#FF5733"
+          }
+        ],
+        "version": 1
+      },
+      "token_usage": {
+        "prompt_tokens": 1143,
+        "completion_tokens": 732,
+        "total_tokens": 1875
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "base_version": 0,
+      "state_version": 0
+    },
+    {
+      "round": 5,
+      "role": "Compliance Critic",
+      "state_version": 0,
+      "conflicts": [
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "tag_1"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.979395412917911 is below the required 4.5.",
+          "numeric_value": 3.979395412917911
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 3.151695004131001 is below the required 4.5.",
+          "numeric_value": 3.151695004131001
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "role": "Priority Arbiter",
+      "base_version": 0,
+      "state_version": 1,
+      "changes": [
+        {
+          "id": "tag_1",
+          "type": "tag",
+          "x": 40.0,
+          "y": 520.0,
+          "w": 100.0,
+          "h": 30.0,
+          "z_index": 1,
+          "text": "Studio B",
+          "font_size": 14,
+          "fg_color": "#000000",
+          "bg_color": "#007BFF"
+        },
+        {
+          "id": "primary_action",
+          "type": "button",
+          "x": 420.0,
+          "y": 520.0,
+          "w": 120.0,
+          "h": 40.0,
+          "z_index": 1,
+          "text": "Book a place",
+          "font_size": 16,
+          "fg_color": "#000000",
+          "bg_color": "#FF5733"
+        }
+      ]
+    }
+  ],
+  "model": "gpt-4o-mini-2024-07-18",
+  "max_rounds": 5,
+  "seed": 1,
+  "method": "single_agent_detector",
+  "task_id": "poster_medium_01",
+  "difficulty": "medium",
+  "domain": "poster",
+  "attempt_index": 0,
+  "effective_seed": 1,
+  "timestamp_utc": "2026-11-27T03:12:52.885043+00:00",
+  "system_fingerprint": "fp_8656e4f1df",
+  "system_fingerprints": [
+    "fp_8656e4f1df",
+    "fp_e4c064397f"
+  ],
+  "resolved_models": [
+    "gpt-4o-mini-2024-07-18"
+  ],
+  "format_rejections": 0,
+  "token_usage": {
+    "prompt_tokens": 6238,
+    "completion_tokens": 4270,
+    "total_tokens": 10508
+  }
+}

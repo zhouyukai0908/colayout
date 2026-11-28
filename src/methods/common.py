@@ -50,9 +50,14 @@ def validate_layout(payload: dict, brief: dict) -> LayoutState:
         if e.w <= 0 or e.h <= 0:
             raise ValueError(f"{e.id} needs positive width and height.")
         if (e.type == "card") != (e.z_index == 0):
-            raise ValueError(f"{e.id} must use z_index 0 for cards or >= 1 for foreground.")
+            raise ValueError(
+                f"{e.id} (type='{e.type}') must use z_index 0 only for type 'card' and >= 1 for foreground."
+            )
         if e.type in TEXT_ROLES and e.text != row["text_or_desc"]:
-            raise ValueError(f"{e.id} must copy its required text_or_desc verbatim.")
+            raise ValueError(
+                f"{e.id} must copy its required text_or_desc verbatim: "
+                f"expected {row['text_or_desc']!r}, got {e.text!r}."
+            )
     return state
 
 
@@ -81,9 +86,20 @@ class RunLog:
             exc.colayout_role = role
             raise
         self.total_tokens += usage["total_tokens"]
-        self.history.append({
+        entry = {
             "round": round_no, "role": role, "response": response, "token_usage": usage,
-        })
+        }
+        last_meta = getattr(self.llm, "last_call_metadata", None)
+        if isinstance(last_meta, dict):
+            if last_meta.get("resolved_model"):
+                entry["resolved_model"] = last_meta["resolved_model"]
+            if last_meta.get("system_fingerprint"):
+                entry["system_fingerprint"] = last_meta["system_fingerprint"]
+            if "format_rejections" in last_meta:
+                entry["format_rejections"] = last_meta["format_rejections"]
+            if last_meta.get("rejection_reasons"):
+                entry["rejection_reasons"] = last_meta["rejection_reasons"]
+        self.history.append(entry)
         return response
 
     def result(self, state: LayoutState, rounds_used: int) -> dict:

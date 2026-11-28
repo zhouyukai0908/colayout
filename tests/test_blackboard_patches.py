@@ -16,17 +16,33 @@ BRIEF = {
     "design_notes": "Align the title and image.",
 }
 
-GEOMETRY_RESPONSE = {"updates": [
-    {"id": "title", "x": 10, "y": 10, "w": 260, "h": 50, "z_index": 1,
-     "type": "button", "text": "wrong", "font_size": "ignored", "bg_color": "ignored"},
-    {"id": "photo", "x": 10, "y": 70, "w": 260, "h": 100},
-    {"id": "panel", "type": "card"},
+STRICT_GEOMETRY_RESPONSE = {"updates": [
+    {"id": "title", "x": 10, "y": 10, "w": 260, "h": 50, "z_index": 1},
+    {"id": "photo", "x": 10, "y": 70, "w": 260, "h": 100, "z_index": 1},
+    {"id": "panel", "x": 0, "y": 0, "w": 320, "h": 180, "z_index": 0},
+]}
+
+STRICT_STYLE_RESPONSE = {"updates": [
+    {"id": "title", "font_size": 25, "fg_color": "#222222"},
+    {"id": "photo", "bg_color": None},
+    {"id": "panel", "bg_color": "#F5F5F5"},
 ]}
 
 
-def test_read_only_row_and_omitted_geometry_get_valid_initial_defaults():
-    response = {"updates": [{"id": "photo", "x": 12}, {"id": "title", "text": "wrong"}]}
-    state = _initial_geometry(response, BRIEF)
+def test_initial_geometry_does_not_prefill_passing_colors_and_requires_all_fields():
+    state = _initial_geometry(STRICT_GEOMETRY_RESPONSE, BRIEF)
+    title, photo, panel = state.elements
+    assert (title.text, title.font_size, title.fg_color, title.bg_color) == ("River walks", None, None, None)
+    assert (photo.bg_color, panel.bg_color, panel.z_index) == (None, None, 0)
+
+    # Incomplete geometry must raise instead of silently falling back to canvas defaults.
+    with pytest.raises(ValueError, match="Initial geometry"):
+        _initial_geometry({"updates": [{"id": "photo", "x": 12}]}, BRIEF)
+
+
+def test_legacy_replay_mode_still_supports_pre_v2_logs():
+    legacy_resp = {"updates": [{"id": "photo", "x": 12}, {"id": "title", "text": "wrong"}]}
+    state = _initial_geometry(legacy_resp, BRIEF, strict_keys=False)
     title, photo, panel = state.elements
     assert [e.id for e in state.elements] == ["title", "photo", "panel"]
     assert (title.text, title.x, title.y, title.w, title.h) == ("River walks", 0, 0, 320, 180)
@@ -39,19 +55,10 @@ def test_empty_initial_proposal_still_needs_an_id():
         _initial_geometry({"updates": []}, BRIEF)
 
 
-def test_mixed_read_only_and_owned_rows_need_one_call_per_initial_role():
+def test_strict_two_stage_init_preserves_copy_and_requires_fg_and_card_bg():
     class Client:
         def __init__(self):
-            self.responses = iter([
-                GEOMETRY_RESPONSE,
-                {"updates": [
-                    {"id": "title", "x": 298, "y": "wrong", "type": "tag",
-                     "text": "wrong", "font_size": 25},
-                    {"id": "title", "fg_color": "#222222"},
-                    {"id": "unknown", "bg_color": "ignored"},
-                    {"id": "photo", "type": "body"},
-                ]},
-            ])
+            self.responses = iter([STRICT_GEOMETRY_RESPONSE, STRICT_STYLE_RESPONSE])
             self.calls = 0
 
         def complete_json(self, messages, validator=None):
@@ -67,19 +74,35 @@ def test_mixed_read_only_and_owned_rows_need_one_call_per_initial_role():
     title, photo, panel = result["final_state"]["elements"]
     assert (title["type"], title["text"], title["x"], title["y"]) == ("title", "River walks", 10, 10)
     assert (title["font_size"], title["fg_color"], title["bg_color"]) == (25, "#222222", None)
-    assert photo["type"] == "image" and panel["z_index"] == 0
+    assert photo["type"] == "image" and panel["bg_color"] == "#F5F5F5" and panel["z_index"] == 0
 
 
-@pytest.mark.parametrize("fields,row", [
-    (GEOMETRY, {"id": "title", "font_size": "ignored", "type": "tag"}),
-    (STYLE, {"id": "title", "x": "ignored", "y": -500}),
-    (STYLE, {"id": "title"}),
-    (STYLE, {"id": "photo", "fg_color": "invalid value outside target scope"}),
+@pytest.mark.parametrize("fields,row,pattern", [
+    (GEOMETRY, {"id": "title", "font_size": 20}, "unknown or non-writable"),
+    (GEOMETRY, {"id": "title", "type": "tag"}, "unknown or non-writable"),
+    (STYLE, {"id": "title", "x": 10}, "unknown or non-writable"),
+    (STYLE, {"id": "title", "field": {"fg_color": "#111111"}}, "nested key 'field'"),
+    (STYLE, {"id": "title", "fg_color": {"hex": "#111111"}}, "nested object"),
+    (STYLE, {"id": "title"}, "at least one field"),
+    (STYLE, {"id": "photo", "fg_color": "#111111"}, "allowed_ids"),
 ])
-def test_filtered_noop_leaves_elements_and_version_unchanged(fields, row):
-    original = _initial_geometry(GEOMETRY_RESPONSE, BRIEF)
-    updated = _patched({"updates": [row]}, original, BRIEF, {"title"}, fields)
-    assert updated == original
+def test_strict_updates_never_silently_drops_unknown_nested_or_out_of_scope_rows(fields, row, pattern):
+    original = _initial_geometry(STRICT_GEOMETRY_RESPONSE, BRIEF)
+    with pytest.raises(ValueError, match=pattern):
+        _patched({"updates": [row]}, original, BRIEF, {"title"}, fields)
+
+
+@pytest.mark.parametrize("style_rows,pattern", [
+    ([{"id": "title", "font_size": 20}, {"id": "panel", "bg_color": "#222222"}], "missing fg_color"),
+    ([{"id": "title", "fg_color": "#222222"}, {"id": "panel", "bg_color": "#222222"}], "missing font_size"),
+    ([{"id": "title", "font_size": 20, "fg_color": "#222222"}, {"id": "panel", "bg_color": None}], "missing non-null bg_color"),
+    ([{"id": "title", "font_size": 20, "fg_color": "#222222"}], "missing non-null bg_color"),
+])
+def test_initial_style_requires_text_fg_font_size_and_card_bg(style_rows, pattern):
+    original = _initial_geometry(STRICT_GEOMETRY_RESPONSE, BRIEF)
+    all_ids = {e.id for e in original.elements}
+    with pytest.raises(ValueError, match=pattern):
+        _patched({"updates": style_rows}, original, BRIEF, all_ids, STYLE, require_initial_style=True)
 
 
 @pytest.mark.parametrize("fields,row", [
@@ -92,6 +115,6 @@ def test_filtered_noop_leaves_elements_and_version_unchanged(fields, row):
     (GEOMETRY, {"id": "title", "z_index": 0}),
 ])
 def test_missing_id_and_invalid_owned_values_still_fail_validation(fields, row):
-    original = _initial_geometry(GEOMETRY_RESPONSE, BRIEF)
+    original = _initial_geometry(STRICT_GEOMETRY_RESPONSE, BRIEF)
     with pytest.raises(ValueError):
         _patched({"updates": [row]}, original, BRIEF, {"title"}, fields)

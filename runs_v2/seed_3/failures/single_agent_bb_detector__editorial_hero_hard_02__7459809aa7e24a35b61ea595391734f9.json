@@ -1,0 +1,35 @@
+{
+  "model": "gpt-4o-mini-2024-07-18",
+  "max_rounds": 5,
+  "seed": 3,
+  "method": "single_agent_bb_detector",
+  "task_id": "editorial_hero_hard_02",
+  "difficulty": "hard",
+  "domain": "editorial_hero",
+  "attempt_index": 0,
+  "effective_seed": 3,
+  "timestamp_utc": "2026-11-27T03:48:08.588479+00:00",
+  "system_fingerprint": "fp_b64d53de28",
+  "system_fingerprints": [
+    "fp_b64d53de28",
+    "fp_e17cdfce12",
+    "fp_e61d09ff08"
+  ],
+  "resolved_models": [
+    "gpt-4o-mini-2024-07-18"
+  ],
+  "format_rejections": 3,
+  "status": "failed",
+  "error_type": "InvalidCompletion",
+  "round_index": 1,
+  "role": "Layout Designer",
+  "token_usage": {
+    "prompt_tokens": 7817,
+    "completion_tokens": 1293,
+    "total_tokens": 9110
+  },
+  "total_tokens": 9110,
+  "unreported_requests": 0,
+  "usage_complete": true,
+  "reason": "Invalid JSON completion after 3 attempts: Element id 'caption' is not in allowed_ids ['description', 'headline', 'primary_action', 'secondary_action', 'subhead', 'tag_1', 'tag_2', 'tag_3', 'visual']."
+}

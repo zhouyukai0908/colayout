@@ -1,0 +1,22 @@
+\begin{table*}[t]
+\centering
+\caption{Eight-method results across 36 briefs $\times$ 3 seeds (108 runs/method, GPT-4o mini). Pre-CSR is pre-arbitration compliance (detector methods reach 100\% terminal CSR under the in-loop check; Sec.~\ref{sec:evaluation}-D reports strict straddling audit); Pre\&Fit adds 100\% pre-arbitration text-fit; Hard Fit is terminal Arial text-fit; Tokens are amortized means; Fail is whole-run failure rate. Bold marks best.}
+\label{tab:main}
+\small
+\setlength{\tabcolsep}{6.0pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Method & Pre-CSR (\%) $\uparrow$ & Pre\&Fit (\%) $\uparrow$ & Rounds $\downarrow$ & Tokens $\downarrow$ & Hard Fit (\%) $\uparrow$ & Fail (\%) $\downarrow$ \\
+\midrule
+Single-Agent & 0.0 & 0.0 & \textbf{1.00} & \textbf{2,341} & 93.9 & 3.6 \\
+Self-Refine & 5.6 & 5.6 & 4.93 & 9,351 & 92.9 & 4.4 \\
+Naive Multi-Agent & 11.1 & 11.1 & 4.30 & 19,893 & 95.1 & 3.6 \\
+SA + Det. & 60.2 & 53.7 & 4.02 & 9,467 & \textbf{95.5} & 6.9 \\
+SA + BB + Det. & 77.8 & \textbf{63.0} & 3.39 & 5,331 & 94.2 & 2.7 \\
+SA-TwoStage + BB + Det. & \textbf{88.0} & 58.3 & 2.98 & 5,548 & 85.8 & \textbf{0.0} \\
+\specialrule{0.35pt}{1.5pt}{1.5pt}
+Ours w/o Detector & 16.7 & 16.7 & 6.00 & 21,247 & 84.2 & 3.6 \\
+CoLayout (Full) & 87.0 & \textbf{63.0} & 2.93 & 5,329 & 85.8 & \textbf{0.0} \\
+\bottomrule
+\end{tabular}
+\end{table*}

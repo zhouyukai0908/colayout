@@ -1,0 +1,959 @@
+{
+  "final_state": {
+    "canvas": {
+      "width": 640,
+      "height": 360,
+      "bg_color": "#FAF8F1"
+    },
+    "elements": [
+      {
+        "id": "panel",
+        "type": "card",
+        "x": 0.0,
+        "y": 64.0,
+        "w": 640.0,
+        "h": 236.0,
+        "z_index": 0,
+        "text": null,
+        "font_size": null,
+        "fg_color": null,
+        "bg_color": "#23342F"
+      },
+      {
+        "id": "headline",
+        "type": "title",
+        "x": 16.0,
+        "y": 8.0,
+        "w": 608.0,
+        "h": 48.0,
+        "z_index": 1,
+        "text": "The Orchard Ledger",
+        "font_size": 36,
+        "fg_color": "#000000",
+        "bg_color": null
+      },
+      {
+        "id": "subhead",
+        "type": "subtitle",
+        "x": 16.0,
+        "y": 56.0,
+        "w": 608.0,
+        "h": 16.0,
+        "z_index": 1,
+        "text": "Long read | Orchard records",
+        "font_size": 20,
+        "fg_color": "#000000",
+        "bg_color": null
+      },
+      {
+        "id": "description",
+        "type": "body",
+        "x": 16.0,
+        "y": 240.0,
+        "w": 608.0,
+        "h": 48.0,
+        "z_index": 1,
+        "text": "Decades of handwritten harvest notes reveal the fortunes of a family orchard.",
+        "font_size": 14,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "visual",
+        "type": "image",
+        "x": 16.0,
+        "y": 80.0,
+        "w": 213.0,
+        "h": 156.0,
+        "z_index": 1,
+        "text": null,
+        "font_size": 1,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "tag_1",
+        "type": "tag",
+        "x": 240.0,
+        "y": 100.0,
+        "w": 100.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Agriculture",
+        "font_size": 14,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "tag_2",
+        "type": "tag",
+        "x": 360.0,
+        "y": 100.0,
+        "w": 100.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Records",
+        "font_size": 14,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "tag_3",
+        "type": "tag",
+        "x": 480.0,
+        "y": 100.0,
+        "w": 100.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Seasons",
+        "font_size": 14,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "primary_action",
+        "type": "button",
+        "x": 128.0,
+        "y": 320.0,
+        "w": 200.0,
+        "h": 36.0,
+        "z_index": 1,
+        "text": "Read article",
+        "font_size": 14,
+        "fg_color": "#000000",
+        "bg_color": null
+      },
+      {
+        "id": "secondary_action",
+        "type": "button",
+        "x": 336.0,
+        "y": 320.0,
+        "w": 200.0,
+        "h": 36.0,
+        "z_index": 1,
+        "text": "Browse facsimiles",
+        "font_size": 14,
+        "fg_color": "#000000",
+        "bg_color": null
+      },
+      {
+        "id": "caption",
+        "type": "body",
+        "x": 16.0,
+        "y": 288.0,
+        "w": 608.0,
+        "h": 16.0,
+        "z_index": 1,
+        "text": "Autumn entries, folio 8",
+        "font_size": 12,
+        "fg_color": "#000000",
+        "bg_color": null
+      }
+    ],
+    "version": 6
+  },
+  "metrics": {
+    "OR": 0.0,
+    "BOR": 0.0,
+    "CPR": 1.0,
+    "AS": 0.5,
+    "CSR": 1.0
+  },
+  "conflicts": [],
+  "rounds_used": 6,
+  "total_tokens": 12871,
+  "history": [
+    {
+      "round": 0,
+      "role": "Layout Designer",
+      "response": {
+        "updates": [
+          {
+            "id": "panel",
+            "x": 0,
+            "y": 64,
+            "w": 640,
+            "h": 236,
+            "z_index": 0,
+            "bg_color": "#23342F"
+          },
+          {
+            "id": "headline",
+            "x": 16,
+            "y": 16,
+            "w": 608,
+            "h": 48,
+            "z_index": 1,
+            "font_size": 32,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "subhead",
+            "x": 16,
+            "y": 48,
+            "w": 608,
+            "h": 16,
+            "z_index": 1,
+            "font_size": 16,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "visual",
+            "x": 16,
+            "y": 80,
+            "w": 213,
+            "h": 156,
+            "z_index": 1,
+            "font_size": 1,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "tag_1",
+            "x": 240,
+            "y": 100,
+            "w": 100,
+            "h": 24,
+            "z_index": 1,
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "tag_2",
+            "x": 360,
+            "y": 100,
+            "w": 100,
+            "h": 24,
+            "z_index": 1,
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "tag_3",
+            "x": 480,
+            "y": 100,
+            "w": 100,
+            "h": 24,
+            "z_index": 1,
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "description",
+            "x": 16,
+            "y": 240,
+            "w": 608,
+            "h": 48,
+            "z_index": 1,
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "caption",
+            "x": 16,
+            "y": 288,
+            "w": 608,
+            "h": 16,
+            "z_index": 1,
+            "font_size": 12,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "primary_action",
+            "x": 128,
+            "y": 320,
+            "w": 200,
+            "h": 36,
+            "z_index": 1,
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "secondary_action",
+            "x": 336,
+            "y": 320,
+            "w": 200,
+            "h": 36,
+            "z_index": 1,
+            "font_size": 14,
+            "fg_color": "#FFFFFF"
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1974,
+        "completion_tokens": 813,
+        "total_tokens": 2787
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_e17cdfce12",
+      "format_rejections": 1,
+      "rejection_reasons": [
+        "2 validation errors for Element\nfont_size\n  Input should be greater than 0 [type=greater_than, input_value=0, input_type=int]\n    For further information visit https://errors.pydantic.dev/2.12/v/greater_than\nfg_color\n  String should match pattern '^#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{6})$' [type=string_pattern_mismatch, input_value='null', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.12/v/string_pattern_mismatch"
+      ],
+      "state_version": 0
+    },
+    {
+      "round": 0,
+      "role": "Compliance Critic",
+      "state_version": 0,
+      "conflicts": [
+        {
+          "conflict_type": "overlap",
+          "element_ids": [
+            "headline",
+            "subhead"
+          ],
+          "severity": "hard",
+          "detail": "Intersection area is 9728 square pixels.",
+          "numeric_value": 9728.0
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "headline"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 3.0.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "subhead"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "secondary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "caption"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        }
+      ]
+    },
+    {
+      "round": 1,
+      "role": "Layout Designer",
+      "response": {
+        "updates": [
+          {
+            "id": "headline",
+            "y": 8,
+            "font_size": 36,
+            "fg_color": "#FFFF00",
+            "z_index": 1
+          },
+          {
+            "id": "subhead",
+            "y": 48,
+            "font_size": 20,
+            "fg_color": "#FFFF00",
+            "z_index": 1
+          },
+          {
+            "id": "primary_action",
+            "fg_color": "#FFFF00",
+            "z_index": 1
+          },
+          {
+            "id": "secondary_action",
+            "fg_color": "#FFFF00",
+            "z_index": 1
+          },
+          {
+            "id": "caption",
+            "fg_color": "#FFFF00",
+            "z_index": 1
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1917,
+        "completion_tokens": 106,
+        "total_tokens": 2023
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_b64d53de28",
+      "format_rejections": 0,
+      "base_version": 0,
+      "state_version": 1
+    },
+    {
+      "round": 1,
+      "role": "Compliance Critic",
+      "state_version": 1,
+      "conflicts": [
+        {
+          "conflict_type": "overlap",
+          "element_ids": [
+            "headline",
+            "subhead"
+          ],
+          "severity": "hard",
+          "detail": "Intersection area is 4864 square pixels.",
+          "numeric_value": 4864.0
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "headline"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.0105304816416254 is below the required 3.0.",
+          "numeric_value": 1.0105304816416254
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "subhead"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.0105304816416254 is below the required 4.5.",
+          "numeric_value": 1.0105304816416254
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.0105304816416254 is below the required 4.5.",
+          "numeric_value": 1.0105304816416254
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "secondary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.0105304816416254 is below the required 4.5.",
+          "numeric_value": 1.0105304816416254
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "caption"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.0105304816416254 is below the required 4.5.",
+          "numeric_value": 1.0105304816416254
+        }
+      ]
+    },
+    {
+      "round": 2,
+      "role": "Layout Designer",
+      "response": {
+        "updates": [
+          {
+            "id": "headline",
+            "x": 16,
+            "y": 8,
+            "w": 608,
+            "h": 48,
+            "z_index": 1,
+            "font_size": 36,
+            "fg_color": "#FFFF00",
+            "bg_color": null
+          },
+          {
+            "id": "subhead",
+            "x": 16,
+            "y": 56,
+            "w": 608,
+            "h": 16,
+            "z_index": 1,
+            "font_size": 20,
+            "fg_color": "#FFFF00",
+            "bg_color": null
+          },
+          {
+            "id": "primary_action",
+            "x": 128,
+            "y": 320,
+            "w": 200,
+            "h": 36,
+            "z_index": 1,
+            "font_size": 14,
+            "fg_color": "#FFFF00",
+            "bg_color": null
+          },
+          {
+            "id": "secondary_action",
+            "x": 336,
+            "y": 320,
+            "w": 200,
+            "h": 36,
+            "z_index": 1,
+            "font_size": 14,
+            "fg_color": "#FFFF00",
+            "bg_color": null
+          },
+          {
+            "id": "caption",
+            "x": 16,
+            "y": 288,
+            "w": 608,
+            "h": 16,
+            "z_index": 1,
+            "font_size": 12,
+            "fg_color": "#FFFF00",
+            "bg_color": null
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1932,
+        "completion_tokens": 218,
+        "total_tokens": 2150
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_b64d53de28",
+      "format_rejections": 0,
+      "base_version": 1,
+      "state_version": 2
+    },
+    {
+      "round": 2,
+      "role": "Compliance Critic",
+      "state_version": 2,
+      "conflicts": [
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "headline"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.0105304816416254 is below the required 3.0.",
+          "numeric_value": 1.0105304816416254
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "subhead"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.0105304816416254 is below the required 4.5.",
+          "numeric_value": 1.0105304816416254
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.0105304816416254 is below the required 4.5.",
+          "numeric_value": 1.0105304816416254
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "secondary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.0105304816416254 is below the required 4.5.",
+          "numeric_value": 1.0105304816416254
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "caption"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.0105304816416254 is below the required 4.5.",
+          "numeric_value": 1.0105304816416254
+        }
+      ]
+    },
+    {
+      "round": 3,
+      "role": "Layout Designer",
+      "response": {
+        "updates": [
+          {
+            "id": "headline",
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "subhead",
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "primary_action",
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "secondary_action",
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "caption",
+            "fg_color": "#FFFFFF"
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1883,
+        "completion_tokens": 107,
+        "total_tokens": 1990
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_b64d53de28",
+      "format_rejections": 0,
+      "base_version": 2,
+      "state_version": 3
+    },
+    {
+      "round": 3,
+      "role": "Compliance Critic",
+      "state_version": 3,
+      "conflicts": [
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "headline"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 3.0.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "subhead"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "secondary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "caption"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        }
+      ]
+    },
+    {
+      "round": 4,
+      "role": "Layout Designer",
+      "response": {
+        "updates": [
+          {
+            "id": "headline",
+            "fg_color": "#FFD700"
+          },
+          {
+            "id": "subhead",
+            "fg_color": "#FFD700"
+          },
+          {
+            "id": "primary_action",
+            "fg_color": "#FFD700"
+          },
+          {
+            "id": "secondary_action",
+            "fg_color": "#FFD700"
+          },
+          {
+            "id": "caption",
+            "fg_color": "#FFD700"
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1868,
+        "completion_tokens": 63,
+        "total_tokens": 1931
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_b64d53de28",
+      "format_rejections": 0,
+      "base_version": 3,
+      "state_version": 4
+    },
+    {
+      "round": 4,
+      "role": "Compliance Critic",
+      "state_version": 4,
+      "conflicts": [
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "headline"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.3199106648161048 is below the required 3.0.",
+          "numeric_value": 1.3199106648161048
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "subhead"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.3199106648161048 is below the required 4.5.",
+          "numeric_value": 1.3199106648161048
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.3199106648161048 is below the required 4.5.",
+          "numeric_value": 1.3199106648161048
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "secondary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.3199106648161048 is below the required 4.5.",
+          "numeric_value": 1.3199106648161048
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "caption"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.3199106648161048 is below the required 4.5.",
+          "numeric_value": 1.3199106648161048
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "role": "Layout Designer",
+      "response": {
+        "updates": [
+          {
+            "id": "headline",
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "subhead",
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "primary_action",
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "secondary_action",
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "caption",
+            "fg_color": "#FFFFFF"
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1883,
+        "completion_tokens": 107,
+        "total_tokens": 1990
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_b64d53de28",
+      "format_rejections": 0,
+      "base_version": 4,
+      "state_version": 5
+    },
+    {
+      "round": 5,
+      "role": "Compliance Critic",
+      "state_version": 5,
+      "conflicts": [
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "headline"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 3.0.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "subhead"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "primary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "secondary_action"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        },
+        {
+          "conflict_type": "contrast",
+          "element_ids": [
+            "caption"
+          ],
+          "severity": "hard",
+          "detail": "Contrast 1.062649024878595 is below the required 4.5.",
+          "numeric_value": 1.062649024878595
+        }
+      ]
+    },
+    {
+      "round": 5,
+      "role": "Priority Arbiter",
+      "base_version": 5,
+      "state_version": 6,
+      "changes": [
+        {
+          "id": "headline",
+          "type": "title",
+          "x": 16.0,
+          "y": 8.0,
+          "w": 608.0,
+          "h": 48.0,
+          "z_index": 1,
+          "text": "The Orchard Ledger",
+          "font_size": 36,
+          "fg_color": "#000000",
+          "bg_color": null
+        },
+        {
+          "id": "subhead",
+          "type": "subtitle",
+          "x": 16.0,
+          "y": 56.0,
+          "w": 608.0,
+          "h": 16.0,
+          "z_index": 1,
+          "text": "Long read | Orchard records",
+          "font_size": 20,
+          "fg_color": "#000000",
+          "bg_color": null
+        },
+        {
+          "id": "primary_action",
+          "type": "button",
+          "x": 128.0,
+          "y": 320.0,
+          "w": 200.0,
+          "h": 36.0,
+          "z_index": 1,
+          "text": "Read article",
+          "font_size": 14,
+          "fg_color": "#000000",
+          "bg_color": null
+        },
+        {
+          "id": "secondary_action",
+          "type": "button",
+          "x": 336.0,
+          "y": 320.0,
+          "w": 200.0,
+          "h": 36.0,
+          "z_index": 1,
+          "text": "Browse facsimiles",
+          "font_size": 14,
+          "fg_color": "#000000",
+          "bg_color": null
+        },
+        {
+          "id": "caption",
+          "type": "body",
+          "x": 16.0,
+          "y": 288.0,
+          "w": 608.0,
+          "h": 16.0,
+          "z_index": 1,
+          "text": "Autumn entries, folio 8",
+          "font_size": 12,
+          "fg_color": "#000000",
+          "bg_color": null
+        }
+      ]
+    }
+  ],
+  "model": "gpt-4o-mini-2024-07-18",
+  "max_rounds": 5,
+  "seed": 1,
+  "method": "single_agent_bb_detector",
+  "task_id": "editorial_hero_hard_04",
+  "difficulty": "hard",
+  "domain": "editorial_hero",
+  "attempt_index": 0,
+  "effective_seed": 1,
+  "timestamp_utc": "2026-11-27T03:15:36.649903+00:00",
+  "system_fingerprint": "fp_b64d53de28",
+  "system_fingerprints": [
+    "fp_b64d53de28",
+    "fp_e17cdfce12"
+  ],
+  "resolved_models": [
+    "gpt-4o-mini-2024-07-18"
+  ],
+  "format_rejections": 1,
+  "token_usage": {
+    "prompt_tokens": 11457,
+    "completion_tokens": 1414,
+    "total_tokens": 12871
+  }
+}

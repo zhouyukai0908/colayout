@@ -1,0 +1,975 @@
+{
+  "final_state": {
+    "canvas": {
+      "width": 500,
+      "height": 360,
+      "bg_color": "#F3F6FA"
+    },
+    "elements": [
+      {
+        "id": "panel",
+        "type": "card",
+        "x": 0.0,
+        "y": 64.0,
+        "w": 500.0,
+        "h": 236.0,
+        "z_index": 0,
+        "text": null,
+        "font_size": null,
+        "fg_color": null,
+        "bg_color": "#142B3D"
+      },
+      {
+        "id": "headline",
+        "type": "title",
+        "x": 16.0,
+        "y": 16.0,
+        "w": 468.0,
+        "h": 32.0,
+        "z_index": 1,
+        "text": "Lab Freezer Watch",
+        "font_size": 24,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "subhead",
+        "type": "subtitle",
+        "x": 16.0,
+        "y": 48.0,
+        "w": 468.0,
+        "h": 16.0,
+        "z_index": 1,
+        "text": "Cold store 2 | -76 C",
+        "font_size": 16,
+        "fg_color": "#B0BEC5",
+        "bg_color": null
+      },
+      {
+        "id": "description",
+        "type": "body",
+        "x": 176.0,
+        "y": 80.0,
+        "w": 232.0,
+        "h": 40.0,
+        "z_index": 1,
+        "text": "Temperature returned to the operating range after a short door opening.",
+        "font_size": 14,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      },
+      {
+        "id": "visual",
+        "type": "image",
+        "x": 0.0,
+        "y": 80.0,
+        "w": 166.0,
+        "h": 140.0,
+        "z_index": 1,
+        "text": null,
+        "font_size": null,
+        "fg_color": null,
+        "bg_color": null
+      },
+      {
+        "id": "tag_1",
+        "type": "tag",
+        "x": 176.0,
+        "y": 136.0,
+        "w": 80.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Recovered",
+        "font_size": 12,
+        "fg_color": "#FFFFFF",
+        "bg_color": "#00796B"
+      },
+      {
+        "id": "tag_2",
+        "type": "tag",
+        "x": 264.0,
+        "y": 168.0,
+        "w": 80.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Door sensor",
+        "font_size": 12,
+        "fg_color": "#000000",
+        "bg_color": "#0091EA"
+      },
+      {
+        "id": "tag_3",
+        "type": "tag",
+        "x": 352.0,
+        "y": 200.0,
+        "w": 80.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Verified",
+        "font_size": 12,
+        "fg_color": "#000000",
+        "bg_color": "#D50000"
+      },
+      {
+        "id": "primary_action",
+        "type": "button",
+        "x": 16.0,
+        "y": 304.0,
+        "w": 224.0,
+        "h": 40.0,
+        "z_index": 1,
+        "text": "Review event",
+        "font_size": 16,
+        "fg_color": "#FFFFFF",
+        "bg_color": "#1E88E5"
+      },
+      {
+        "id": "secondary_action",
+        "type": "button",
+        "x": 260.0,
+        "y": 304.0,
+        "w": 224.0,
+        "h": 40.0,
+        "z_index": 1,
+        "text": "View history",
+        "font_size": 16,
+        "fg_color": "#FFFFFF",
+        "bg_color": "#1E88E5"
+      },
+      {
+        "id": "caption",
+        "type": "body",
+        "x": 176.0,
+        "y": 184.0,
+        "w": 308.0,
+        "h": 24.0,
+        "z_index": 1,
+        "text": "Door open for 42 s",
+        "font_size": 12,
+        "fg_color": "#FFFFFF",
+        "bg_color": null
+      }
+    ],
+    "version": 12
+  },
+  "metrics": {
+    "OR": 0.014874035511759785,
+    "BOR": 0.0,
+    "CPR": 0.4444444444444444,
+    "AS": 0.7,
+    "CSR": 0.0
+  },
+  "conflicts": [
+    {
+      "conflict_type": "overlap",
+      "element_ids": [
+        "tag_2",
+        "caption"
+      ],
+      "severity": "hard",
+      "detail": "Intersection area is 640 square pixels.",
+      "numeric_value": 640.0
+    },
+    {
+      "conflict_type": "overlap",
+      "element_ids": [
+        "tag_3",
+        "caption"
+      ],
+      "severity": "hard",
+      "detail": "Intersection area is 640 square pixels.",
+      "numeric_value": 640.0
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "headline"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 1.0839453929806442 is below the required 3.0.",
+      "numeric_value": 1.0839453929806442
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "subhead"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 1.7584216995843003 is below the required 4.5.",
+      "numeric_value": 1.7584216995843003
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "tag_3"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 3.829226792296221 is below the required 4.5.",
+      "numeric_value": 3.829226792296221
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "primary_action"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 3.678856047046611 is below the required 4.5.",
+      "numeric_value": 3.678856047046611
+    },
+    {
+      "conflict_type": "contrast",
+      "element_ids": [
+        "secondary_action"
+      ],
+      "severity": "hard",
+      "detail": "Contrast 3.678856047046611 is below the required 4.5.",
+      "numeric_value": 3.678856047046611
+    }
+  ],
+  "rounds_used": 6,
+  "total_tokens": 29471,
+  "history": [
+    {
+      "round": 0,
+      "role": "Layout Architect",
+      "response": {
+        "updates": [
+          {
+            "id": "panel",
+            "x": 0,
+            "y": 64,
+            "w": 500,
+            "h": 236,
+            "z_index": 0
+          },
+          {
+            "id": "headline",
+            "x": 16,
+            "y": 16,
+            "w": 468,
+            "h": 32,
+            "z_index": 1
+          },
+          {
+            "id": "subhead",
+            "x": 16,
+            "y": 48,
+            "w": 468,
+            "h": 16,
+            "z_index": 1
+          },
+          {
+            "id": "visual",
+            "x": 0,
+            "y": 80,
+            "w": 166,
+            "h": 140,
+            "z_index": 1
+          },
+          {
+            "id": "description",
+            "x": 176,
+            "y": 80,
+            "w": 308,
+            "h": 40,
+            "z_index": 1
+          },
+          {
+            "id": "tag_1",
+            "x": 176,
+            "y": 128,
+            "w": 80,
+            "h": 24,
+            "z_index": 1
+          },
+          {
+            "id": "tag_2",
+            "x": 264,
+            "y": 128,
+            "w": 80,
+            "h": 24,
+            "z_index": 1
+          },
+          {
+            "id": "tag_3",
+            "x": 352,
+            "y": 128,
+            "w": 80,
+            "h": 24,
+            "z_index": 1
+          },
+          {
+            "id": "caption",
+            "x": 176,
+            "y": 160,
+            "w": 308,
+            "h": 24,
+            "z_index": 1
+          },
+          {
+            "id": "primary_action",
+            "x": 16,
+            "y": 304,
+            "w": 224,
+            "h": 40,
+            "z_index": 1
+          },
+          {
+            "id": "secondary_action",
+            "x": 260,
+            "y": 304,
+            "w": 224,
+            "h": 40,
+            "z_index": 1
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 586,
+        "completion_tokens": 289,
+        "total_tokens": 875
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_d59fd87e00",
+      "format_rejections": 0,
+      "state_version": 0
+    },
+    {
+      "round": 0,
+      "role": "Visual & Typography Agent",
+      "response": {
+        "updates": [
+          {
+            "id": "panel",
+            "bg_color": "#142B3D"
+          },
+          {
+            "id": "headline",
+            "font_size": 24,
+            "fg_color": "#FFFFFF"
+          },
+          {
+            "id": "subhead",
+            "font_size": 16,
+            "fg_color": "#B0BEC5"
+          },
+          {
+            "id": "description",
+            "font_size": 14,
+            "fg_color": "#E0E0E0"
+          },
+          {
+            "id": "visual",
+            "bg_color": null
+          },
+          {
+            "id": "tag_1",
+            "font_size": 12,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#00796B"
+          },
+          {
+            "id": "tag_2",
+            "font_size": 12,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#0091EA"
+          },
+          {
+            "id": "tag_3",
+            "font_size": 12,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#D50000"
+          },
+          {
+            "id": "primary_action",
+            "font_size": 16,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#1E88E5"
+          },
+          {
+            "id": "secondary_action",
+            "font_size": 16,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#1E88E5"
+          },
+          {
+            "id": "caption",
+            "font_size": 12,
+            "fg_color": "#E0E0E0"
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1558,
+        "completion_tokens": 368,
+        "total_tokens": 1926
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_c4117ad984",
+      "format_rejections": 0,
+      "base_version": 0,
+      "state_version": 1
+    },
+    {
+      "round": 0,
+      "role": "Compliance Critic",
+      "response": {
+        "conflicts": [
+          {
+            "conflict_type": "overlap",
+            "element_ids": [
+              "tag_1",
+              "tag_2"
+            ],
+            "detail": "Tags overlap due to overlapping coordinates.",
+            "numeric_value": 7
+          },
+          {
+            "conflict_type": "contrast",
+            "element_ids": [
+              "description"
+            ],
+            "detail": "Low contrast ratio between text color #E0E0E0 and background color #142B3D.",
+            "numeric_value": 2.6
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1542,
+        "completion_tokens": 117,
+        "total_tokens": 1659
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "state_version": 1
+    },
+    {
+      "round": 1,
+      "role": "Layout Architect",
+      "response": {
+        "updates": [
+          {
+            "id": "tag_1",
+            "x": 176,
+            "y": 136,
+            "z_index": 1
+          },
+          {
+            "id": "tag_2",
+            "x": 264,
+            "y": 136,
+            "z_index": 1
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1618,
+        "completion_tokens": 43,
+        "total_tokens": 1661
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_b64d53de28",
+      "format_rejections": 0,
+      "base_version": 1,
+      "state_version": 2
+    },
+    {
+      "round": 1,
+      "role": "Visual & Typography Agent",
+      "response": {
+        "updates": [
+          {
+            "id": "description",
+            "fg_color": "#FFFFFF"
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1611,
+        "completion_tokens": 15,
+        "total_tokens": 1626
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_f6d5921f1d",
+      "format_rejections": 0,
+      "base_version": 2,
+      "state_version": 3
+    },
+    {
+      "round": 1,
+      "role": "Compliance Critic",
+      "response": {
+        "conflicts": [
+          {
+            "conflict_type": "contrast",
+            "element_ids": [
+              "caption"
+            ],
+            "detail": "Low color contrast between text and background, ratio is 1.83, which is below threshold of 4.5.",
+            "numeric_value": 1.83
+          },
+          {
+            "conflict_type": "overlap",
+            "element_ids": [
+              "tag_3",
+              "description"
+            ],
+            "detail": "Tags overlap with description text, intersection area is 12.",
+            "numeric_value": 12
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1537,
+        "completion_tokens": 88,
+        "total_tokens": 1625
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "state_version": 3
+    },
+    {
+      "round": 2,
+      "role": "Layout Architect",
+      "response": {
+        "updates": [
+          {
+            "id": "description",
+            "x": 176,
+            "y": 80,
+            "w": 232,
+            "h": 40,
+            "z_index": 1
+          },
+          {
+            "id": "tag_3",
+            "x": 352,
+            "y": 160,
+            "w": 80,
+            "h": 24,
+            "z_index": 1
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1614,
+        "completion_tokens": 57,
+        "total_tokens": 1671
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_b64d53de28",
+      "format_rejections": 0,
+      "base_version": 3,
+      "state_version": 4
+    },
+    {
+      "round": 2,
+      "role": "Visual & Typography Agent",
+      "response": {
+        "updates": [
+          {
+            "id": "caption",
+            "font_size": 12,
+            "fg_color": "#FFFFFF",
+            "bg_color": null
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1609,
+        "completion_tokens": 25,
+        "total_tokens": 1634
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_d932b185f7",
+      "format_rejections": 0,
+      "base_version": 4,
+      "state_version": 5
+    },
+    {
+      "round": 2,
+      "role": "Compliance Critic",
+      "response": {
+        "conflicts": [
+          {
+            "conflict_type": "overlap",
+            "element_ids": [
+              "tag_2",
+              "tag_3"
+            ],
+            "detail": "Tags overlap each other in the vertical direction.",
+            "numeric_value": 16
+          },
+          {
+            "conflict_type": "contrast",
+            "element_ids": [
+              "tag_1"
+            ],
+            "detail": "Text color (#FFFFFF) on background (#00796B) has contrast ratio 4.5, which is below the required threshold.",
+            "numeric_value": 4.5
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1532,
+        "completion_tokens": 126,
+        "total_tokens": 1658
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "state_version": 5
+    },
+    {
+      "round": 3,
+      "role": "Layout Architect",
+      "response": {
+        "updates": [
+          {
+            "id": "tag_3",
+            "y": 176,
+            "z_index": 1
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1610,
+        "completion_tokens": 20,
+        "total_tokens": 1630
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_b64d53de28",
+      "format_rejections": 0,
+      "base_version": 5,
+      "state_version": 6
+    },
+    {
+      "round": 3,
+      "role": "Visual & Typography Agent",
+      "response": {
+        "updates": [
+          {
+            "id": "tag_1",
+            "fg_color": "#000000"
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1610,
+        "completion_tokens": 18,
+        "total_tokens": 1628
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_f6d5921f1d",
+      "format_rejections": 0,
+      "base_version": 6,
+      "state_version": 7
+    },
+    {
+      "round": 3,
+      "role": "Compliance Critic",
+      "response": {
+        "conflicts": [
+          {
+            "conflict_type": "overlap",
+            "element_ids": [
+              "tag_2",
+              "tag_3"
+            ],
+            "detail": "Tag 'Door sensor' overlaps with tag 'Verified'.",
+            "numeric_value": 32
+          },
+          {
+            "conflict_type": "contrast",
+            "element_ids": [
+              "tag_2"
+            ],
+            "detail": "Tag 'Door sensor' has low contrast color combination.",
+            "numeric_value": 2.7
+          },
+          {
+            "conflict_type": "overflow",
+            "element_ids": [
+              "caption"
+            ],
+            "detail": "Caption overflows beyond its z-index containment area.",
+            "numeric_value": 76
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1533,
+        "completion_tokens": 107,
+        "total_tokens": 1640
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "state_version": 7
+    },
+    {
+      "round": 4,
+      "role": "Layout Architect",
+      "response": {
+        "updates": [
+          {
+            "id": "tag_2",
+            "x": 264.0,
+            "y": 136.0,
+            "w": 80.0,
+            "h": 24.0,
+            "z_index": 1
+          },
+          {
+            "id": "tag_3",
+            "x": 352.0,
+            "y": 136.0,
+            "w": 80.0,
+            "h": 24.0,
+            "z_index": 1
+          },
+          {
+            "id": "caption",
+            "x": 176.0,
+            "y": 184.0,
+            "w": 308.0,
+            "h": 24.0,
+            "z_index": 1
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1661,
+        "completion_tokens": 178,
+        "total_tokens": 1839
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_b64d53de28",
+      "format_rejections": 0,
+      "base_version": 7,
+      "state_version": 8
+    },
+    {
+      "round": 4,
+      "role": "Visual & Typography Agent",
+      "response": {
+        "updates": [
+          {
+            "id": "tag_2",
+            "fg_color": "#000000"
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1595,
+        "completion_tokens": 18,
+        "total_tokens": 1613
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_f6d5921f1d",
+      "format_rejections": 0,
+      "base_version": 8,
+      "state_version": 9
+    },
+    {
+      "round": 4,
+      "role": "Compliance Critic",
+      "response": {
+        "conflicts": [
+          {
+            "conflict_type": "contrast",
+            "element_ids": [
+              "tag_3"
+            ],
+            "detail": "Text color #FFFFFF on background #D50000 has a contrast ratio of 2.2, which is below the 4.5 threshold for small text.",
+            "numeric_value": 2.2
+          },
+          {
+            "conflict_type": "overlap",
+            "element_ids": [
+              "tag_1",
+              "tag_2"
+            ],
+            "detail": "Tags overlap since their y-coordinates and heights allow for intersection.",
+            "numeric_value": 192
+          },
+          {
+            "conflict_type": "overlap",
+            "element_ids": [
+              "tag_2",
+              "tag_3"
+            ],
+            "detail": "Tags overlap since their y-coordinates and heights allow for intersection.",
+            "numeric_value": 192
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1534,
+        "completion_tokens": 140,
+        "total_tokens": 1674
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "state_version": 9
+    },
+    {
+      "round": 5,
+      "role": "Layout Architect",
+      "response": {
+        "updates": [
+          {
+            "id": "tag_1",
+            "x": 176,
+            "y": 136,
+            "w": 80,
+            "h": 24,
+            "z_index": 1
+          },
+          {
+            "id": "tag_2",
+            "x": 264,
+            "y": 168,
+            "w": 80,
+            "h": 24,
+            "z_index": 1
+          },
+          {
+            "id": "tag_3",
+            "x": 352,
+            "y": 200,
+            "w": 80,
+            "h": 24,
+            "z_index": 1
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1676,
+        "completion_tokens": 156,
+        "total_tokens": 1832
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_b64d53de28",
+      "format_rejections": 0,
+      "base_version": 9,
+      "state_version": 10
+    },
+    {
+      "round": 5,
+      "role": "Visual & Typography Agent",
+      "response": {
+        "updates": [
+          {
+            "id": "tag_3",
+            "fg_color": "#000000"
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1618,
+        "completion_tokens": 18,
+        "total_tokens": 1636
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_d932b185f7",
+      "format_rejections": 0,
+      "base_version": 10,
+      "state_version": 11
+    },
+    {
+      "round": 5,
+      "role": "Compliance Critic",
+      "response": {
+        "conflicts": [
+          {
+            "conflict_type": "overlap",
+            "element_ids": [
+              "tag_1",
+              "tag_2"
+            ],
+            "detail": "Tags 'Recovered' and 'Door sensor' are overlapping.",
+            "numeric_value": 16
+          },
+          {
+            "conflict_type": "contrast",
+            "element_ids": [
+              "tag_1"
+            ],
+            "detail": "Low contrast ratio of tag text color #000000 on background #00796B.",
+            "numeric_value": 2.0
+          },
+          {
+            "conflict_type": "overflow",
+            "element_ids": [
+              "caption"
+            ],
+            "detail": "Caption element exceeds canvas height.",
+            "numeric_value": 24
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1535,
+        "completion_tokens": 109,
+        "total_tokens": 1644
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_8656e4f1df",
+      "format_rejections": 0,
+      "state_version": 11
+    },
+    {
+      "round": 5,
+      "role": "Priority Arbiter",
+      "base_version": 11,
+      "state_version": 12,
+      "changes": [
+        {
+          "id": "tag_1",
+          "type": "tag",
+          "x": 176.0,
+          "y": 136.0,
+          "w": 80.0,
+          "h": 24.0,
+          "z_index": 1,
+          "text": "Recovered",
+          "font_size": 12,
+          "fg_color": "#FFFFFF",
+          "bg_color": "#00796B"
+        }
+      ]
+    }
+  ],
+  "model": "gpt-4o-mini-2024-07-18",
+  "max_rounds": 5,
+  "seed": 1,
+  "method": "ours_no_detector",
+  "task_id": "dashboard_card_hard_02",
+  "difficulty": "hard",
+  "domain": "dashboard_card",
+  "attempt_index": 0,
+  "effective_seed": 1,
+  "timestamp_utc": "2026-11-27T03:17:44.009549+00:00",
+  "system_fingerprint": "fp_8656e4f1df",
+  "system_fingerprints": [
+    "fp_8656e4f1df",
+    "fp_b64d53de28",
+    "fp_c4117ad984",
+    "fp_d59fd87e00",
+    "fp_d932b185f7",
+    "fp_f6d5921f1d"
+  ],
+  "resolved_models": [
+    "gpt-4o-mini-2024-07-18"
+  ],
+  "format_rejections": 0,
+  "token_usage": {
+    "prompt_tokens": 27579,
+    "completion_tokens": 1892,
+    "total_tokens": 29471
+  }
+}

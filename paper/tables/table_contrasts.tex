@@ -1,0 +1,17 @@
+\begin{table*}[t]
+\centering
+\caption{Controlled paired contrasts across four architectural steps (detector, blackboard+copy injection+patches, sequential init., and roles+routing+locks) via brief-clustered bootstrap over 3 seeds ($B=20{,}000$; $n=36$ all, $12$ hard). Pre-CSR is in pp; Tokens are amortized means. $^*$95\% CI excludes zero.}
+\label{tab:contrasts}
+\footnotesize
+\setlength{\tabcolsep}{2.7pt}
+\begin{tabular}{@{}llrrrr@{}}
+\toprule
+Mechanism & Contrast & $\Delta$ Pre-CSR All & $\Delta$ Pre-CSR Hard & $\Delta$ Tokens All & $\Delta$ Tokens Hard \\
+\midrule
+Detector & CoLayout $-$ w/o Det. & +70.4 [+60.2, +79.6]$^*$ & +72.2 [+52.8, +88.9]$^*$ & $-$15,918 [$-$17,699, $-$14,208]$^*$ & $-$21,264 [$-$23,256, $-$19,557]$^*$ \\
+BB \& patches & SA+BB+Det. $-$ SA+Det. & +17.6 [+4.6, +31.5]$^*$ & +52.8 [+27.8, +75.0]$^*$ & $-$4,136 [$-$5,374, $-$2,952]$^*$ & $-$8,033 [$-$9,553, $-$6,617]$^*$ \\
+Sequential init. & TwoStage $-$ SA+BB+Det. & +10.2 [$-$0.9, +22.2] & +19.4 [$-$8.3, +47.2] & +216 [$-$663, +983] & $-$113 [$-$2,204, +1,652] \\
+Roles \& locks & CoLayout $-$ TwoStage & $-$0.9 [$-$10.2, +7.4] & $-$5.6 [$-$30.6, +16.7] & $-$219 [$-$739, +315] & $-$364 [$-$1,535, +877] \\
+\bottomrule
+\end{tabular}
+\end{table*}

@@ -1,0 +1,169 @@
+{
+  "final_state": {
+    "canvas": {
+      "width": 600,
+      "height": 800,
+      "bg_color": "#FFF9ED"
+    },
+    "elements": [
+      {
+        "id": "headline",
+        "type": "title",
+        "x": 50.0,
+        "y": 50.0,
+        "w": 500.0,
+        "h": 60.0,
+        "z_index": 1,
+        "text": "Seed Swap Sunday",
+        "font_size": 48,
+        "fg_color": "#333333",
+        "bg_color": null
+      },
+      {
+        "id": "subhead",
+        "type": "subtitle",
+        "x": 50.0,
+        "y": 120.0,
+        "w": 500.0,
+        "h": 40.0,
+        "z_index": 1,
+        "text": "12 May | Glasshouse Yard",
+        "font_size": 24,
+        "fg_color": "#555555",
+        "bg_color": null
+      },
+      {
+        "id": "visual",
+        "type": "image",
+        "x": 50.0,
+        "y": 180.0,
+        "w": 500.0,
+        "h": 400.0,
+        "z_index": 1,
+        "text": null,
+        "font_size": null,
+        "fg_color": null,
+        "bg_color": null
+      },
+      {
+        "id": "primary_action",
+        "type": "button",
+        "x": 50.0,
+        "y": 600.0,
+        "w": 500.0,
+        "h": 60.0,
+        "z_index": 1,
+        "text": "Reserve a table",
+        "font_size": 28,
+        "fg_color": "#FFFFFF",
+        "bg_color": "#5B9B5D"
+      }
+    ],
+    "version": 0
+  },
+  "metrics": {
+    "OR": 0.0,
+    "BOR": 0.0,
+    "CPR": 1.0,
+    "AS": 1.0,
+    "CSR": 1.0
+  },
+  "conflicts": [],
+  "rounds_used": 1,
+  "total_tokens": 1491,
+  "history": [
+    {
+      "round": 0,
+      "role": "Layout Designer",
+      "response": {
+        "updates": [
+          {
+            "id": "headline",
+            "x": 50,
+            "y": 50,
+            "w": 500,
+            "h": 60,
+            "z_index": 1,
+            "font_size": 48,
+            "fg_color": "#333333",
+            "bg_color": null
+          },
+          {
+            "id": "subhead",
+            "x": 50,
+            "y": 120,
+            "w": 500,
+            "h": 40,
+            "z_index": 1,
+            "font_size": 24,
+            "fg_color": "#555555",
+            "bg_color": null
+          },
+          {
+            "id": "visual",
+            "x": 50,
+            "y": 180,
+            "w": 500,
+            "h": 400,
+            "z_index": 1,
+            "font_size": null,
+            "fg_color": null,
+            "bg_color": null
+          },
+          {
+            "id": "primary_action",
+            "x": 50,
+            "y": 600,
+            "w": 500,
+            "h": 60,
+            "z_index": 1,
+            "font_size": 28,
+            "fg_color": "#FFFFFF",
+            "bg_color": "#5B9B5D"
+          }
+        ]
+      },
+      "token_usage": {
+        "prompt_tokens": 1129,
+        "completion_tokens": 362,
+        "total_tokens": 1491
+      },
+      "resolved_model": "gpt-4o-mini-2024-07-18",
+      "system_fingerprint": "fp_e17cdfce12",
+      "format_rejections": 1,
+      "rejection_reasons": [
+        "visual (type='image') must use z_index 0 only for type 'card' and >= 1 for foreground."
+      ],
+      "state_version": 0
+    },
+    {
+      "round": 0,
+      "role": "Compliance Critic",
+      "state_version": 0,
+      "conflicts": []
+    }
+  ],
+  "model": "gpt-4o-mini-2024-07-18",
+  "max_rounds": 5,
+  "seed": 2,
+  "method": "single_agent_bb_detector",
+  "task_id": "poster_easy_01",
+  "difficulty": "easy",
+  "domain": "poster",
+  "attempt_index": 0,
+  "effective_seed": 2,
+  "timestamp_utc": "2026-11-27T03:29:32.649635+00:00",
+  "system_fingerprint": "fp_e17cdfce12",
+  "system_fingerprints": [
+    "fp_e17cdfce12"
+  ],
+  "resolved_models": [
+    "gpt-4o-mini-2024-07-18"
+  ],
+  "format_rejections": 1,
+  "token_usage": {
+    "prompt_tokens": 1129,
+    "completion_tokens": 362,
+    "total_tokens": 1491
+  }
+}

@@ -1,0 +1,18 @@
+\begin{table}[t]
+\centering
+\caption{Repair diagnostics across the four detector-guided methods (108 runs/method). Displacement is mean Round-0-to-final element center shift; Arbiter counts fallback runs; Regressions count contrast-to-geometry (C$\to$G) and geometry-to-contrast (G$\to$C) regressions. Bold marks best.}
+\label{tab:diagnostics}
+\footnotesize
+\setlength{\tabcolsep}{3.0pt}
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+Diagnostic & SA+Det. & SA+BB+Det. & SA-TwoStage & CoLayout \\
+\midrule
+Repair displacement (px) $\downarrow$ & 5.07 & 5.00 & 1.66 & \textbf{1.20} \\
+Arbiter triggers (/108) $\downarrow$ & 43 & 24 & \textbf{13} & 14 \\
+Regressions (C$\to$G / G$\to$C) $\downarrow$ & 0 / 4 & 5 / 3 & \textbf{0 / 0} & \textbf{0 / 0} \\
+\bottomrule
+\end{tabular}%
+}
+\end{table}

@@ -250,12 +250,10 @@ def test_single_agent_bb_detector_programmatic_copy_union_allowed_ids_and_arbite
         {"id": "note", "x": 10, "y": 60, "w": 80, "h": 25, "z_index": 1, "font_size": 14, "fg_color": "#FFFFFF"},
         {"id": "ok_tag", "x": 10, "y": 120, "w": 60, "h": 20, "z_index": 1, "font_size": 12, "fg_color": "#000000"},
     ]}
-    # Round 1: fix BOTH geometry (headline x) and style (note fg_color) in one partial patch;
-    # attempt to touch non-allowed ok_tag and overwrite text -> both must be ignored!
+    # Round 1: fix BOTH geometry (headline x) and style (note fg_color) in one partial patch.
     r1 = {"updates": [
-        {"id": "headline", "x": 10, "text": "TAMPERED"},
+        {"id": "headline", "x": 10},
         {"id": "note", "fg_color": "#111111"},
-        {"id": "ok_tag", "x": 99},
     ]}
     llm = ScriptedLLM(r0, r1)
     report = single_agent_bb_detector.run_method(brief, llm, max_rounds=5)
@@ -270,6 +268,20 @@ def test_single_agent_bb_detector_programmatic_copy_union_allowed_ids_and_arbite
     assert by_id["note"]["text"] == "Keep verbatim"
     assert by_id["ok_tag"]["x"] == 10.0  # untouched because not in allowed_ids
     assert _pre_arbiter_csr({**report, "method": "single_agent_bb_detector"}, brief) == 1.0
+
+    # Strict zero-silent-drop: attempting to overwrite text or edit non-allowed ok_tag must raise.
+    with pytest.raises(ValueError, match="unknown or non-writable"):
+        single_agent_bb_detector.run_method(
+            brief,
+            ScriptedLLM(r0, {"updates": [{"id": "headline", "x": 10, "text": "TAMPERED"}]}),
+            max_rounds=5,
+        )
+    with pytest.raises(ValueError, match="allowed_ids"):
+        single_agent_bb_detector.run_method(
+            brief,
+            ScriptedLLM(r0, {"updates": [{"id": "ok_tag", "x": 99}]}),
+            max_rounds=5,
+        )
 
     # Case 2: exhausts K=1 and falls back to Priority Arbiter; _pre_arbiter_csr must replay 0.0
     llm2 = ScriptedLLM(r0, {"updates": [{"id": "headline", "x": -5}]})

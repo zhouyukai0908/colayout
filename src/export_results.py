@@ -49,7 +49,7 @@ def _pre_arbiter_csr(row: dict, brief: dict) -> float:
             role = entry.get("role")
             rnd = entry.get("round")
             if role == BB_DESIGNER and rnd == 0:
-                state = _initial_all_fields(entry["response"], brief)
+                state = _initial_all_fields(entry["response"], brief, strict_keys=False)
             elif role == "Compliance Critic" and isinstance(entry.get("conflicts"), list):
                 last_hard = [
                     Conflict.model_validate(c) for c in entry["conflicts"] if c.get("severity") == "hard"
@@ -57,7 +57,34 @@ def _pre_arbiter_csr(row: dict, brief: dict) -> float:
             elif role == BB_DESIGNER and isinstance(rnd, int) and rnd >= 1 and state is not None:
                 routed = [c for c in last_hard if c.conflict_type in BB_CONFLICT_TYPES]
                 ids = {i for c in routed for i in c.element_ids}
-                state = _patched(entry["response"], state, brief, ids, BB_ALL_FIELDS)
+                state = _patched(entry["response"], state, brief, ids, BB_ALL_FIELDS, strict_keys=False)
+            elif role == "Priority Arbiter":
+                break
+        if state is not None:
+            return float(evaluate_layout(state)["metrics"]["CSR"])
+    if method == "sa_twostage_bb_det":
+        state = None
+        last_hard: list[Conflict] = []
+        r0_designer_calls = 0
+        for entry in history:
+            role = entry.get("role")
+            rnd = entry.get("round")
+            if role == BB_DESIGNER and rnd == 0:
+                stage = entry.get("init_stage")
+                if stage == "geometry" or (stage is None and r0_designer_calls == 0):
+                    state = _initial_geometry(entry["response"], brief, strict_keys=False)
+                else:
+                    ids = {e.id for e in state.elements}
+                    state = _patched(entry["response"], state, brief, ids, STYLE, strict_keys=False)
+                r0_designer_calls += 1
+            elif role == "Compliance Critic" and isinstance(entry.get("conflicts"), list):
+                last_hard = [
+                    Conflict.model_validate(c) for c in entry["conflicts"] if c.get("severity") == "hard"
+                ]
+            elif role == BB_DESIGNER and isinstance(rnd, int) and rnd >= 1 and state is not None:
+                routed = [c for c in last_hard if c.conflict_type in BB_CONFLICT_TYPES]
+                ids = {i for c in routed for i in c.element_ids}
+                state = _patched(entry["response"], state, brief, ids, BB_ALL_FIELDS, strict_keys=False)
             elif role == "Priority Arbiter":
                 break
         if state is not None:
@@ -69,10 +96,10 @@ def _pre_arbiter_csr(row: dict, brief: dict) -> float:
             role = entry.get("role")
             rnd = entry.get("round")
             if role == ARCHITECT and rnd == 0:
-                state = _initial_geometry(entry["response"], brief)
+                state = _initial_geometry(entry["response"], brief, strict_keys=False)
             elif role == VISUAL and rnd == 0 and state is not None:
                 ids = {e.id for e in state.elements}
-                state = _patched(entry["response"], state, brief, ids, STYLE)
+                state = _patched(entry["response"], state, brief, ids, STYLE, strict_keys=False)
             elif role == "Compliance Critic":
                 if isinstance(entry.get("conflicts"), list):
                     last_hard = [
@@ -87,7 +114,7 @@ def _pre_arbiter_csr(row: dict, brief: dict) -> float:
                 fields = GEOMETRY if role == ARCHITECT else STYLE
                 types = {"overflow", "overlap"} if role == ARCHITECT else {"contrast", "min_font"}
                 ids = {i for c in last_hard if c.conflict_type in types for i in c.element_ids}
-                state = _patched(entry["response"], state, brief, ids, fields)
+                state = _patched(entry["response"], state, brief, ids, fields, strict_keys=False)
             elif role == "Priority Arbiter":
                 break
         if state is not None:

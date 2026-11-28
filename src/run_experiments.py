@@ -11,6 +11,7 @@ import re
 import sys
 from collections import defaultdict
 from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
+from datetime import datetime, timezone
 from pathlib import Path
 from statistics import fmean
 from tempfile import NamedTemporaryFile
@@ -24,8 +25,8 @@ if __package__ in (None, ""):
 from src.generate_briefs import DEFAULT_PATH, generate_briefs
 from src.llm_client import InvalidCompletion, LLMClient, model_name
 from src.methods import (
-    naive_multi_agent, ours_full, ours_no_detector, self_refine, single_agent,
-    single_agent_bb_detector, single_agent_detector,
+    naive_multi_agent, ours_full, ours_no_detector, sa_twostage_bb_det, self_refine,
+    single_agent, single_agent_bb_detector, single_agent_detector,
 )
 
 
@@ -35,6 +36,7 @@ METHODS = {
     "naive_multi_agent": naive_multi_agent.run_method,
     "single_agent_detector": single_agent_detector.run_method,
     "single_agent_bb_detector": single_agent_bb_detector.run_method,
+    "sa_twostage_bb_det": sa_twostage_bb_det.run_method,
     "ours_no_detector": ours_no_detector.run_method,
     "ours_full": ours_full.run_method,
 }
@@ -107,10 +109,24 @@ def _load_cache(raw_dir: Path, config: dict, briefs_by_id: dict) -> dict:
     return rows
 
 
-def _run_one(method: str, brief: dict, config: dict, raw_dir: Path, clients) -> dict:
+def _run_one(
+    method: str,
+    brief: dict,
+    config: dict,
+    raw_dir: Path,
+    clients,
+    *,
+    explicit_model: bool = False,
+    attempt_index: int = 0,
+) -> dict:
     # Each worker reuses its own client; its usage counters never span concurrent jobs.
+    base_seed = config.get("seed")
+    effective_seed = (base_seed + 1000 * attempt_index) if base_seed is not None else None
     if not hasattr(clients, "llm"):
-        clients.llm = LLMClient()
+        if effective_seed is not None or explicit_model:
+            clients.llm = LLMClient(model=config["model"], seed=effective_seed)
+        else:
+            clients.llm = LLMClient()
     llm = clients.llm
     task_id = brief["task_id"]
     print(f"Running {method} {task_id}", flush=True)
@@ -118,15 +134,34 @@ def _run_one(method: str, brief: dict, config: dict, raw_dir: Path, clients) -> 
         **config, "method": method, "task_id": task_id,
         "difficulty": brief["difficulty"], "domain": brief["domain"],
     }
+    if base_seed is not None:
+        metadata["attempt_index"] = attempt_index
+        metadata["effective_seed"] = effective_seed
     before = dict(getattr(llm, "cumulative_usage", {}))
     unknown_before = getattr(llm, "unreported_requests", 0)
+    rej_before = getattr(llm, "format_rejections", 0)
+    meta_before = len(getattr(llm, "call_metadata", []))
+
+    def _provenance_fields() -> dict:
+        new_meta = getattr(llm, "call_metadata", [])[meta_before:]
+        fps = sorted({m["system_fingerprint"] for m in new_meta if m.get("system_fingerprint")})
+        rms = sorted({m["resolved_model"] for m in new_meta if m.get("resolved_model")})
+        return {
+            "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+            "system_fingerprint": fps[0] if fps else None,
+            "system_fingerprints": fps,
+            "resolved_models": rms,
+            "format_rejections": getattr(llm, "format_rejections", 0) - rej_before,
+        }
+
     try:
         result = METHODS[method](brief, llm, max_rounds=config["max_rounds"])
     except (Exception, KeyboardInterrupt) as exc:
         usage = {k: llm.cumulative_usage[k] - v for k, v in before.items()}
         unknown = getattr(llm, "unreported_requests", 0) - unknown_before
         failure = {
-            **metadata, "status": "failed", "error_type": type(exc).__name__,
+            **metadata, **_provenance_fields(),
+            "status": "failed", "error_type": type(exc).__name__,
             "round_index": getattr(exc, "colayout_round", None),
             "role": getattr(exc, "colayout_role", None),
             "token_usage": usage or None, "total_tokens": usage.get("total_tokens"),
@@ -140,7 +175,7 @@ def _run_one(method: str, brief: dict, config: dict, raw_dir: Path, clients) -> 
         _atomic_write(failure_path, json.dumps(failure, indent=2, ensure_ascii=False) + "\n")
         print(f"Failed attempt saved to {failure_path}", file=sys.stderr, flush=True)
         raise
-    record = {**result, **metadata}
+    record = {**result, **metadata, **_provenance_fields()}
     if before:
         record["token_usage"] = {k: llm.cumulative_usage[k] - v for k, v in before.items()}
     row = _summary_row(record)
@@ -149,8 +184,18 @@ def _run_one(method: str, brief: dict, config: dict, raw_dir: Path, clients) -> 
     return row
 
 
-def run_experiments(methods: list[str], limit: int | None, max_rounds: int, out_dir: Path,
-                    *, workers: int = 1, continue_on_invalid: bool = False) -> Path:
+def run_experiments(
+    methods: list[str],
+    limit: int | None,
+    max_rounds: int,
+    out_dir: Path,
+    *,
+    workers: int = 1,
+    continue_on_invalid: bool = False,
+    seed: int | None = None,
+    model: str | None = None,
+    attempt_index: int = 0,
+) -> Path:
     """Save selected runs and aggregate every completed checkpoint in the directory."""
     if max_rounds < 1 or (limit is not None and limit < 0):
         raise ValueError("max_rounds must be positive and limit must be nonnegative")
@@ -158,6 +203,10 @@ def run_experiments(methods: list[str], limit: int | None, max_rounds: int, out_
         raise ValueError(f"methods must be selected from {list(METHODS)}")
     if workers < 1:
         raise ValueError("workers must be positive")
+    if seed is not None and (isinstance(seed, bool) or type(seed) is not int):
+        raise ValueError("seed must be an integer")
+    if isinstance(attempt_index, bool) or type(attempt_index) is not int or attempt_index < 0:
+        raise ValueError("attempt_index must be a nonnegative integer")
     briefs = json.loads(DEFAULT_PATH.read_bytes()) if DEFAULT_PATH.is_file() else generate_briefs()
     briefs_by_id = {b["task_id"]: b for b in briefs}
     if len(briefs_by_id) != len(briefs) or any(
@@ -165,8 +214,14 @@ def run_experiments(methods: list[str], limit: int | None, max_rounds: int, out_
     ):
         raise ValueError("Benchmark task IDs must be unique and filename-safe")
 
-    config = {"model": model_name(), "max_rounds": max_rounds}
-    raw_dir = Path(out_dir) / "raw"
+    resolved_model = model or model_name()
+    config: dict = {"model": resolved_model, "max_rounds": max_rounds}
+    target_dir = Path(out_dir)
+    if seed is not None:
+        config["seed"] = seed
+        if target_dir.name != f"seed_{seed}":
+            target_dir = target_dir / f"seed_{seed}"
+    raw_dir = target_dir / "raw"
     raw_dir.mkdir(parents=True, exist_ok=True)
     summary_path = raw_dir.parent / "summary.csv"
     rows = _load_cache(raw_dir, config, briefs_by_id)
@@ -183,11 +238,15 @@ def run_experiments(methods: list[str], limit: int | None, max_rounds: int, out_
     clients = local()
     invalid = []
     stop = Event()
+    explicit_model = model is not None
 
     def attempt(job):
         method, brief = job
         try:
-            return _run_one(method, brief, config, raw_dir, clients)
+            return _run_one(
+                method, brief, config, raw_dir, clients,
+                explicit_model=explicit_model, attempt_index=attempt_index,
+            )
         except InvalidCompletion:
             if not continue_on_invalid:
                 stop.set()
@@ -256,10 +315,17 @@ def main() -> None:
     parser.add_argument("--workers", type=int, default=1, help="Concurrent independent method/task pairs.")
     parser.add_argument("--continue-on-invalid", action="store_true",
                         help="Finish other selected pairs after JSON validation retries are exhausted.")
+    parser.add_argument("--seed", type=int, default=None,
+                        help="Optional integer seed forwarded to the API; writes under <out-dir>/seed_<seed>.")
+    parser.add_argument("--model", type=str, default=None,
+                        help="Optional model snapshot name overriding MODEL_NAME (e.g., gpt-4o-mini-2024-07-18).")
     args = parser.parse_args()
     try:
-        summary = run_experiments(args.methods, args.limit, args.max_rounds, args.out_dir,
-                                  workers=args.workers, continue_on_invalid=args.continue_on_invalid)
+        summary = run_experiments(
+            args.methods, args.limit, args.max_rounds, args.out_dir,
+            workers=args.workers, continue_on_invalid=args.continue_on_invalid,
+            seed=args.seed, model=args.model,
+        )
     except ValueError as exc:
         parser.exit(2, f"{parser.prog}: {exc}\n")
     print(f"Summary: {summary}")

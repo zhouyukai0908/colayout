@@ -1,0 +1,339 @@
+% Select the text encoding before IEEEtran initializes its Times font family.
+\RequirePackage[T1]{fontenc}
+\documentclass[conference]{IEEEtran}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,graphicx,balance}
+% The legacy algorithm.sty source has Latin-1 comments. XeTeX defaults to UTF-8.
+\ifdefined\XeTeXdefaultencoding\XeTeXdefaultencoding "ISO-8859-1"\relax\fi
+\usepackage{algorithm}
+\ifdefined\XeTeXdefaultencoding\XeTeXdefaultencoding "UTF-8"\relax\fi
+\usepackage{algpseudocode}
+\usepackage{tikz}
+\usepackage[hidelinks]{hyperref}
+\def\UrlBigBreaks{\do\/}
+\def\UrlBreaks{\do\/\do-\do.}
+\Urlmuskip=0mu plus 1mu
+% Toggle to \anonymoustrue for double-blind review; \anonymousfalse for single-blind / camera-ready.
+\newif\ifanonymous
+\anonymousfalse
+\ifanonymous
+  \newcommand*{\CoLayoutAuthorNames}{Anonymous Author(s)}
+\else
+  \newcommand*{\CoLayoutAuthorNames}{Yukai Zhou}
+\fi
+\hypersetup{pdftitle={CoLayout: Coordinating Layout Design Agents Through a Shared Design State},
+            pdfauthor={\CoLayoutAuthorNames}}
+
+\input{generated_numbers.tex}
+
+\title{CoLayout: Coordinating Layout Design Agents\\Through a Shared Design State}
+\ifanonymous
+\author{\IEEEauthorblockN{\CoLayoutAuthorNames}
+  \IEEEauthorblockA{\textit{Affiliation withheld for double-blind review}\\
+    \textit{Location withheld}\\
+    Contact withheld}
+}
+\else
+\author{\IEEEauthorblockN{\CoLayoutAuthorNames}
+  \IEEEauthorblockA{\textit{Department of Industrial Design}\\
+    \textit{Faculty of Design, University of Macau}\\
+    Macao SAR, China\\
+    yukai.zhou@connect.um.edu.mo}
+}
+\fi
+
+\addtolength{\dblfloatsep}{-7pt}
+\addtolength{\dbltextfloatsep}{-9pt}
+\addtolength{\textfloatsep}{-12pt}
+\addtolength{\floatsep}{-4pt}
+\raggedbottom
+\begin{document}
+\bstctlcite{IEEEexample:BSTcontrol}
+\maketitle
+
+\begin{abstract}
+In collaborative layout design, spatial and visual constraints remain tightly
+coupled even when editing roles are separated. We present and empirically
+decompose CoLayout, a shared-state framework pairing a versioned blackboard for
+partial patches, a round-start deterministic conflict detector, sequential
+geometry-then-style initialization, and role-scoped field locks with a
+priority-ordered fallback arbiter. Across a controlled benchmark with a pinned
+language model, deterministic checking and shared-state partial patches drive
+convergence and efficiency: deterministic detection raises pre-arbitration
+satisfaction (Pre-CSR) by \vDPreDet{} while cutting tokens by \vTokCutDetPct{},
+and replacing full-state regeneration with blackboard partial patches adds
+\vDPreBB{} Pre-CSR while cutting tokens by \vTokCutBBPct{}. Sequential
+initialization significantly lowers repair displacement at the cost of lower
+hard-brief text-fit, whereas role separation and field locks show no significant
+difference in convergence or token cost over an unlocked two-stage control while
+enforcing write isolation by construction.
+\end{abstract}
+\begin{IEEEkeywords}
+collaborative design, multi-agent systems, layout generation, constraint checking,
+shared design state
+\end{IEEEkeywords}
+
+\section{Introduction}
+Consider a dashboard card with a title, a pump reading, and an operating note.
+Shifting the note by a few pixels can move it onto a dark panel: although copy
+and foreground color stay unchanged, the text becomes illegible. This
+illustrates \emph{cross-role constraint dependency}: write ownership separates
+geometry from typography, yet layout constraints remain coupled, requiring
+agreement on state version, affected elements, and writable fields.
+
+Language models offer a flexible design interface, whereas numerical layout
+checks admit deterministic evaluation---whether two positive-area rectangles
+intersect follows directly from four coordinates per element. Re-inferring such
+facts from chat history obscures which edit resolved or reintroduced a conflict.
+
+We ask which architectural components actually drive convergence, repair
+stability, and cost when coordinating layout agents around a shared artifact. To
+answer this, we introduce CoLayout---a versioned shared-state framework coupling
+field-scoped patches with a round-start deterministic detector and conflict
+router---and decompose it through a prompt-aligned, four-step ablation ladder
+across \vMethodCount{} methods and \vSeedCount{} seeds. Our experiments show
+that deterministic detection and shared-state partial patches account for the
+primary gains in pre-arbitration satisfaction and token efficiency; sequential
+geometry-then-style initialization significantly reduces repair displacement
+while improving hard-brief zone adherence at a hard-brief text-fit cost; and
+role separation with field locks shows no statistically significant convergence
+or token difference over an unlocked two-stage control while enforcing
+schema-level write isolation by construction.
+
+This paper makes three contributions:
+\begin{enumerate}
+\item A prompt-aligned, four-step architectural decomposition across
+\vMethodCount{} methods and \vSeedCount{} seeds (\vRunsTotal{} completed runs)
+with brief-clustered bootstrap intervals and repair diagnostics quantifying
+where convergence, cost, stability, and text-fit trade-offs originate.
+\item A versioned shared-state layout protocol with field-level write ownership,
+preserving element inventory and verbatim copy while logging auditable partial
+patches.
+\item Round-start deterministic conflict routing and priority-ordered fallback
+repair for overflow, overlap, and WCAG contrast violations across three layout
+domains.
+\end{enumerate}
+
+\input{related.tex}
+\input{method.tex}
+
+\section{Experiments and Evaluation}\label{sec:evaluation}
+\input{tables/table_contrasts.tex}
+
+\subsection{Tasks, methods, and prompt alignment}
+We cross three domains (posters, dashboard cards, editorial heroes) with three
+difficulties (four briefs/cell, \vBriefCount{} briefs total). Each brief fixes
+canvas size, background color, element inventory (IDs/types), verbatim copy, and
+design notes; image descriptions specify intended subjects while the renderer
+draws reserved boxes. Easy briefs contain 4--5 elements, medium 7--9 with a card
+container, and hard 10--11 reserving the top 64~px for headers, bottom 56~px for
+two actions, and a dark middle card for description, caption, and tags, tightly coupling
+placement to contrast.
+
+We compare \vMethodCount{} methods across all briefs. Three detector-free
+baselines---one-shot \emph{Single-Agent}, iterative
+\emph{Self-Refine}~\cite{madaan2023selfrefine}, and chat-based \emph{Naive
+Multi-Agent}---establish reference performance without executable checks. Five
+controlled variants then step through CoLayout's four mechanisms using the same
+$K=5$ budget and Priority Arbiter: (1)~\emph{SA + Det.}\ pairs a single agent
+with the deterministic detector, regenerating full \texttt{LayoutState} JSON
+each round; (2)~\emph{SA + BB + Det.}\ adds the shared blackboard, programmatic
+copy injection, and partial patches, with one unlocked agent initializing and
+editing all fields; (3)~\emph{SA-TwoStage + BB + Det.}\ splits Round~0 into
+sequential geometry and style calls while keeping unlocked single-agent
+revision; (4)~\emph{CoLayout (Full)} adds role-scoped field locks and routed
+revision; and (5)~\emph{Ours w/o Detector} retains CoLayout's blackboard and
+locks but replaces deterministic checking with an LLM critic.
+
+To prevent prompt asymmetry from confounding architectural effects, all
+detector-guided methods share identical verbatim geometry, styling, and revision
+rule constants: single-agent methods concatenate the architect's and visual
+agent's rule blocks verbatim, differing only in output-format placeholders,
+initialization staging, and field-lock enforcement.
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=5.45in]{figures/fig2_performance.pdf}
+  \caption{Constraint satisfaction and mean amortized tokens by difficulty
+  across all \vMethodCount{} methods (\vBriefCount{} briefs $\times$
+  \vSeedCount{} seeds; \emph{CoLayout} highlighted in terracotta). In (a), solid
+  bars show Pre-CSR and dashed caps mark runs resolved by the Priority Arbiter;
+  (b) shows mean amortized tokens per task.}
+  \label{fig:performance}
+\end{figure*}
+
+\begin{figure*}[t]
+  \centering
+  \includegraphics[width=5.45in]{figures/fig3_case_study.pdf}
+  \caption{Illustrative hard brief (\emph{\vCaseTitle},
+  \vCaseW$\times$\vCaseH~px, seed~\vCaseSeed{}, pre-arbitration states)
+  highlighting the two primary drivers. (a)~\emph{Ours w/o Detector} leaves
+  \vCaseNDOv{} overlap and \vCaseNDCp{} contrast failures (\vCaseNDTok{}
+  tokens); (b)~\emph{SA + Det.}\ clears overlap via deterministic checks but
+  still stalls with \vCaseSDCp{} header contrast failures under full-state
+  regeneration (\vCaseSDTok{} tokens); (c)~\emph{CoLayout} clears all hard
+  checks in \vCaseCoRnd{} rounds (\vCaseCoTok{} tokens, \vCaseCoFit{}
+  text-fit).}
+  \label{fig:case}
+\end{figure*}
+
+\subsection{Protocol, stopping rules, and statistical analysis}
+All \vMethodCount{} methods run in one contiguous batch on the pinned snapshot
+\texttt{gpt-4o-mini-2024-07-18} (JSON mode, no \texttt{max\_\allowbreak tokens}
+cap) across \vSeedCount{} seeds (\vRunsPerMethod{} runs/method, \vRunsTotal{}
+completed runs), evaluated under an analysis plan fixed before the full run. We
+fix $K=5$: Single-Agent runs one round, Self-Refine and Naive Multi-Agent cap at
+five rounds, and the five controlled variants allow initialization plus five
+correction rounds (six recorded); all detector-guided methods average
+\vRndFull--\vRndSADet{} rounds, well below the cap. Malformed or unknown-key
+responses trigger up to two in-round retries without silent drops; if an attempt
+still fails validation, the run restarts from scratch with a derived seed (up to
+three attempts). With \vResidualFail{} residual failures across
+\vFailAttemptsTotal{} retried attempts (highest failure rate \vFailRateMax{} in
+SA + Det.), intention-to-treat and complete-case compliance coincide; primary
+token means amortize failed attempts. Four controlled contrasts
+(Table~\ref{tab:contrasts}) pool all \vSeedCount{} seeds and compute 95\%
+brief-clustered percentile bootstrap confidence intervals ($B=20{,}000$,
+resampling the \vBriefCount{} briefs or \vHardBriefCount{} hard briefs).
+
+\subsection{Main results and architectural decomposition}
+Table~\ref{tab:main}, Table~\ref{tab:contrasts}, and Fig.~\ref{fig:performance}
+compare the four steps.
+
+\textbf{Deterministic detection} (\emph{CoLayout} vs.\ \emph{Ours w/o
+Detector}) drives the largest compliance and cost gains.
+Detector-free baselines rarely converge (\vPreSA--\vPreNaive{} Pre-CSR), and
+substituting an LLM critic inside CoLayout's blackboard drops Pre-CSR to
+\vPreNoDet{}. Restoring deterministic detection raises Pre-CSR by \vDPreDet{}
+overall (hard \vPreFullHard{} vs.\ \vPreNoDetHard{}) while cutting amortized
+tokens by \vTokCutDetPct{} (\vTokFull{} vs.\ \vTokNoDet{}).
+
+\textbf{Shared blackboard and partial patches} (\emph{SA + BB + Det.}\ vs.\
+\emph{SA + Det.}) are the second major driver. Moving from full-state JSON
+regeneration to the versioned blackboard with programmatic copy injection and
+partial patches raises Pre-CSR by \vDPreBB{} overall (\vPreSABB{} vs.\
+\vPreSADet{}) and \vDPreBBHard{} on hard briefs (\vPreSABBHard{} vs.\
+\vPreSADetHard{}), cuts amortized tokens by \vTokCutBBPct{} (\vTokSABB{} vs.\
+\vTokSADet{}), and lowers whole-run failure rate from \vFailRateSADet{} to
+\vFailRateSABB{}.
+
+\textbf{Sequential initialization} (\emph{SA-TwoStage + BB + Det.}\ vs.\
+\emph{SA + BB + Det.}) splits Round~0 into geometry followed by styling while
+keeping revision unlocked. Pre-CSR rises from \vPreSABB{} to \vPreTwoStage{}
+(\vDPreSeq{} overall; \vDPreSeqHard{} hard), an effect that is directionally
+consistent but not statistically significant as both 95\% CIs span zero
+(Table~\ref{tab:contrasts}). Amortized token cost stays flat (\vTokTwoStage{}
+vs.\ \vTokSABB{}, CI spanning zero), as the extra Round-0 call
+(\vCallsTwoStage{} vs.\ \vCallsSABB{} calls) is offset by slightly fewer rounds
+(\vRndTwoStage{} vs.\ \vRndSABB{}). Crucially, sequential initialization
+significantly reduces Round-0-to-final center displacement by \vDDispSeq{}~px
+(Table~\ref{tab:diagnostics}) and box-size drift (mean $|\Delta w|+|\Delta h|$:
+\vDwhSABB{} to \vDwhTwoStage{}~px; \vDwhFull{}~px in CoLayout) while raising terminal hard-brief zone adherence (full-box band compliance) from
+\vZoneSABB{} to \vZoneTwoStage{} (\vZoneFull{} in CoLayout). This
+trades off a significant \vDFitHardSeq{} drop in terminal hard-brief raster
+text-fit (\vFitHardTwoStage{} vs.\ \vFitHardSABB{}, 95\% CI \vDFitHardSeqCI{}~pp);
+on hard briefs, layout-level joint compliance and 100\% text-fit drops from
+\vJointPreHardSABB{} (\emph{SA + BB + Det.}) to \vJointPreHardTwoStage{}
+(\emph{SA-TwoStage}) and \vJointPreHardFull{} (\emph{CoLayout}) pre-arbitration
+(\vJointFinHardSABB{} vs.\ \vJointFinHardTwoStage{} and \vJointFinHardFull{}
+terminally). Across all briefs, \emph{CoLayout} and \emph{SA + BB + Det.}\ tie
+at \vJointPreFull{} Pre\&Fit (Table~\ref{tab:main}).
+
+\textbf{Role separation, routing, and field locks} (\emph{CoLayout (Full)} vs.\
+\emph{SA-TwoStage + BB + Det.}) show no statistically significant difference in
+convergence or cost: Pre-CSR differs by \vDPreLock{} (\vPreFull{} vs.\
+\vPreTwoStage{}) and tokens by \vDTokLock{}, with 95\% CIs spanning zero across
+Pre-CSR, tokens, displacement (\vDDispLock{}~px), and hard text-fit (identical
+at \vFitHardFull{}). Likewise, CoLayout's combined Pre-CSR gain over \emph{SA +
+BB + Det.}\ (\vDPreFullBB{}~pp) touches zero. On this benchmark, field locks are
+therefore justified by schema-enforced write isolation rather than convergence
+speed, complementing the patch-level auditability already provided by the
+versioned blackboard.
+
+\input{tables/table_diagnostics.tex}
+
+\subsection{Repair diagnostics and illustrative case}
+Under aligned prompts, Round-0 compliance is uniformly low across all four
+detector-guided methods (\vRzeroMin--\vRzeroMax{}), showing that sequential
+decomposition does not act by solving layouts in Round~0. Instead, separating
+geometry from styling cuts Round-0 geometry conflicts from \vRzeroGeomSABB{}
+(\emph{SA + BB + Det.}) to \vRzeroGeomTwoStage{} (\emph{SA-TwoStage}) and
+\vRzeroGeomFull{} (\emph{CoLayout}) across \vRunsPerMethod{} runs, which is associated with higher revision conversion (share of Round-0 failures
+resolved pre-arbitration: \vConvSABB{} to \vConvTwoStage{} and \vConvFull{})
+and significantly smaller Round-0-to-final center displacement
+(\vDispSABB{}~px to \vDispTwoStage{} and \vDispFull{}~px;
+Table~\ref{tab:diagnostics}; \vDDispFullBB{}~px for CoLayout vs.\ SA + BB +
+Det.). Priority Arbiter fallback triggers drop correspondingly from
+\vArbSADet{} (\emph{SA + Det.}) and \vArbSABB{} (\emph{SA + BB + Det.}) to
+\vArbTwoStage{} (\emph{SA-TwoStage}) and \vArbFull{} (\emph{CoLayout}) out of
+\vRunsPerMethod{} runs. Finally, unlocked single-agent methods incur
+cross-attribute regressions (\vRegCGSABB{} C$\to$G and \vRegGCSABB{} G$\to$C in
+\emph{SA + BB + Det.}; \vRegGCSADet{} G$\to$C in \emph{SA + Det.}), whereas both two-stage workflows record \vRegTwoStage{} (\emph{SA-TwoStage}) and
+\vRegFull{} (\emph{CoLayout}); in CoLayout, contrast-to-geometry regressions are
+ruled out by schema construction rather than prompt adherence. A stricter
+offline audit checking worst-case contrast across partially overlapped cards
+flags \vStradFlipPreFull/\vRunsPerMethod{} Pre-CSR and
+\vStradFlipFinFull/\vRunsPerMethod{} terminal violations in \emph{CoLayout}
+(\vStradFlipPreTwoStage{} Pre-CSR, \vStradFlipFinTwoStage{} terminal in
+\emph{SA-TwoStage}), versus \vStradFlipPreSABB/\vRunsPerMethod{} Pre-CSR
+(\vStradFlipFinSABB{} terminal) in \emph{SA + BB + Det.}\ (strict Pre-CSR
+\vStrictPreSABB{}) and \vStradFlipFinSADet{} terminal in \emph{SA + Det.},
+leaving all primary conclusions unchanged.
+
+Fig.~\ref{fig:case} illustrates the two primary drivers on \emph{\vCaseTitle}
+(seed~\vCaseSeed{}, pre-arbitration): \emph{Ours w/o Detector} leaves
+\vCaseNDOv{} overlap (\vCaseNDOR{} OR) and \vCaseNDCp{} contrast failures
+(\vCaseNDCPR{} CPR); \emph{SA + Det.}\ resolves overlap (\vCaseSDOR{} OR) and
+footer contrast but still stalls on \vCaseSDCp{} header failures (\vCaseSDCPR{}
+CPR); and \emph{CoLayout} clears all hard conflicts in \vCaseCoRnd{} rounds
+(\vCaseCoTok{} tokens, \vCaseCoFit{} text-fit, zero arbitration).
+
+\section{Discussion, Limitations, and Conclusion}\label{sec:discussion}
+\subsection{Trade-offs and design implications}
+The controlled ladder exposes a concrete trade-off in sequential initialization:
+initializing box dimensions before styling lowers net repair displacement
+(\vDispTwoStage{} vs.\ \vDispSABB{}~px; \vDispFull{}~px in \emph{CoLayout}), but without an in-loop text-fit check,
+tight initial boxes remain uncorrected during revision, consistent with the
+shared \vDFitHardSeq{} hard text-fit drop in \emph{SA-TwoStage} and
+\emph{CoLayout} (\vFitHardFull{} vs.\ \vFitHardSABB{}, Table~\ref{tab:main};
+all methods color \vCardHardAll{} of hard dark cards). Closing this gap calls for a deterministic text-fit check or cross-role height
+expansion requests. Although role separation and field locks show no significant
+convergence gain in autonomous runs, explicit write boundaries complement
+versioned patch logs in human-in-the-loop co-editing, letting a designer assume one role, pin elements,
+or override automated patches on the shared state.
+
+\subsection{Limitations}
+This evaluation has four main limitations. All \vRunsTotal{} runs use a single
+language model (\texttt{gpt-4o-mini-2024-07-18}), so effect sizes on stronger
+reasoning models or open-weight models remain untested. The benchmark spans
+\vBriefCount{} synthetic briefs with fixed element inventories and solid
+background fills rather than production templates with reflowing copy or
+photographic backgrounds. We evaluate deterministic compliance and raster
+text-fit without a user study of aesthetic preference or human co-editing
+effort. Finally, raster text-fit and partial card-boundary straddling are
+audited offline rather than enforced inside the deterministic detector loop.
+\ifanonymous
+Code, briefs, and raw logs will be released upon acceptance.
+\else
+Code, briefs, checks, and raw logs are available at
+\url{https://github.com/zhouyukai0908/colayout}.
+\fi
+
+\subsection{Conclusion}
+Across \vMethodCount{} prompt-aligned methods and \vRunsTotal{} multi-seed runs,
+our controlled ablation ladder clarifies where gains in shared-state layout
+coordination originate: deterministic conflict detection (\vDPreDet{} Pre-CSR,
+\vTokCutDetPct{} token reduction) and blackboard partial patching (\vDPreBB{}
+Pre-CSR, \vTokCutBBPct{} token reduction) drive convergence and efficiency;
+sequential initialization significantly lowers repair displacement and improves
+hard-brief zone adherence at a \vDFitHardSeq{} hard-brief text-fit cost; and
+role-scoped field locks show no significant convergence difference over an
+unlocked two-stage control. Practitioners building LLM layout agents should
+prioritize versioned shared-state partial patches and deterministic checking for
+convergence and auditability, adding role separation and field locks when
+schema-enforced write isolation is required.
+
+\balance
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+\end{document}

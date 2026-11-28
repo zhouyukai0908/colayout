@@ -1,0 +1,38 @@
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Automated Layout Design}
+Layout representations govern both learning and verification.
+LayoutGAN~\cite{li2019layoutgan} refines labels and geometry via a
+differentiable wireframe renderer, while
+LayoutTransformer~\cite{gupta2021layouttransformer} models layouts as attribute
+sequences with self-attention. LayoutGPT~\cite{feng2023layoutgpt} prompts
+language models with style-sheet exemplars, and
+LayoutPrompter~\cite{lin2023layoutprompter} pairs exemplar retrieval with a
+post-hoc ranker scoring overlap and alignment. Extending to iterative agents,
+CAL-RAG~\cite{forouzandehmehr2025calrag} combines multimodal retrieval with
+vision-language feedback for content-aware layouts, while
+SheetDesigner~\cite{chen2025sheetdesigner} merges rule- and vision-based
+reflection for spreadsheets. CoLayout instead centers on a versioned shared
+state with disjoint field write ownership, round-start deterministic routing,
+and auditable partial patches under WCAG~2.1~SC~1.4.3 contrast
+thresholds~\cite{wcag21}.
+
+\subsection{Multi-Agent Collaboration and Conflict Control}
+Blackboard architectures coordinate specialists around an inspectable shared
+state~\cite{hayesroth1985blackboard}, and cooperative design systems explicitly
+manage cross-specialist constraint conflicts~\cite{klein1991conflict}. Modern
+LLM frameworks orchestrate tool-using conversations
+(AutoGen~\cite{wu2024autogen}), staged software roles
+(ChatDev~\cite{qian2024chatdev}), and structured intermediate artifacts
+(MetaGPT~\cite{hong2024metagpt}). Within CSCWD, Tian et
+al.~\cite{tian2026rolellm} studied role-based LLM teams for capture-the-flag
+solving, and Wang et al.~\cite{wang2024conflict} prevented semantic coding
+conflicts via request--invitation--approval.
+
+CoLayout adapts blackboard control and deterministic routing to layout design
+by scoping each role's writes to disjoint fields with round-start verification:
+an overlap report lets the architect shift a headline without touching
+typography, while our controlled ablations evaluate deterministic detection,
+shared-state partial patching, sequential initialization, and field-locked
+roles.
